@@ -7,7 +7,6 @@ import io
 from gtts import gTTS
 
 # --- 1. DATA: EXERCISE LIBRARY ---
-# Hardcoded data so no external JSON file is needed
 EXERCISE_LIBRARY = [
   {
     "id": "seated_shoulder_press",
@@ -165,7 +164,7 @@ def get_audio_html(text):
 
 def generate_workout_plan(user_profile):
     """Simple rule-based logic to select suitable exercises."""
-    plan = []
+    # Ensure profile is safe to use
     disability = user_profile.get('disability', [])
     equipment = user_profile.get('equipment', [])
     goal = user_profile.get('goal', 'mobility')
@@ -222,34 +221,71 @@ def check_badges():
 
 # --- 3. COMPONENTS ---
 
-def render_onboarding():
-    st.header("Welcome to FitBod 👋")
-    st.write("Let's build a plan that works for *you*.")
+def render_profile_form(existing_profile=None):
+    """Renders the onboarding form, pre-filled if editing."""
     
-    with st.form("onboarding_form"):
+    # Determine Header and Defaults
+    if existing_profile:
+        st.header("Edit Profile")
+        btn_text = "Update Profile"
+        # Extract defaults
+        def_disability = existing_profile.get("disability", [])
+        def_goal_val = existing_profile.get("goal", "mobility")
+        def_equip = existing_profile.get("equipment", [])
+        def_style = existing_profile.get("style", "gentle")
+    else:
+        st.header("Welcome to FitBod 👋")
+        st.write("Let's build a plan that works for *you*.")
+        btn_text = "Create My Plan"
+        def_disability = []
+        def_goal_val = "mobility"
+        def_equip = []
+        def_style = "gentle"
+
+    # Define Options
+    goal_options = ["strength", "mobility", "balance", "endurance", "confidence building"]
+    
+    # Handle Selectbox Index safely
+    try:
+        goal_index = goal_options.index(def_goal_val)
+    except ValueError:
+        goal_index = 0
+
+    with st.form("profile_form"):
         st.subheader("1. About You")
         disability = st.multiselect(
             "I identify with / require support for:",
-            ["wheelchair user", "limited upper-body mobility", "limited lower-body mobility", "visual impairment", "neurodivergent support"]
+            ["wheelchair user", "limited upper-body mobility", "limited lower-body mobility", "visual impairment", "neurodivergent support"],
+            default=def_disability
         )
         
         st.subheader("2. Your Goal")
-        goal = st.selectbox("Main focus?", ["strength", "mobility", "balance", "endurance", "confidence building"])
+        goal = st.selectbox("Main focus?", goal_options, index=goal_index)
         
         st.subheader("3. Equipment")
-        equipment = st.multiselect("What do you have available?", ["resistance bands", "light weights", "chair"])
+        equipment = st.multiselect(
+            "What do you have available?", 
+            ["resistance bands", "light weights", "chair"],
+            default=def_equip
+        )
         
         st.subheader("4. Motivation Style")
-        style = st.select_slider("Coaching style?", ["gentle", "direct", "energetic"])
+        style = st.select_slider("Coaching style?", ["gentle", "direct", "energetic"], value=def_style)
         
-        submitted = st.form_submit_button("Create My Plan")
+        submitted = st.form_submit_button(btn_text)
         
         if submitted:
             st.session_state.user_profile = {
                 "disability": disability, "goal": goal, 
                 "equipment": equipment, "style": style, "onboarded": True
             }
-            st.success("Profile Saved! Generating...")
+            # Clear edit mode
+            st.session_state.editing_profile = False
+            # Clear current plan to force regeneration with new settings
+            if 'current_plan' in st.session_state:
+                del st.session_state.current_plan
+                
+            st.success("Profile Saved!")
             st.rerun()
 
 def render_workout_card(exercise, show_audio=False):
@@ -282,31 +318,43 @@ st.set_page_config(page_title="FitBod - Accessible Fitness", page_icon="🥑", l
 if 'user_profile' not in st.session_state: st.session_state.user_profile = None
 if 'streak' not in st.session_state: st.session_state.streak = 0
 if 'accessibility_mode' not in st.session_state: st.session_state.accessibility_mode = False
+if 'editing_profile' not in st.session_state: st.session_state.editing_profile = False
 
-# Sidebar Toggle for Accessibility
+# Sidebar: Settings & Edit Profile
 with st.sidebar:
     st.title("Settings")
+    
+    # Accessibility Toggle
     mode = st.toggle("♿ Accessibility Mode", value=st.session_state.accessibility_mode)
     if mode != st.session_state.accessibility_mode:
         st.session_state.accessibility_mode = mode
         st.rerun()
+    
+    st.write("---")
+    
+    # Edit Profile Button
+    if st.session_state.user_profile:
+        if st.button("✏️ Edit Profile"):
+            st.session_state.editing_profile = True
+            st.rerun()
 
 apply_accessibility_styles(st.session_state.accessibility_mode)
 
 # Main Title
 st.title("FitBod 🥑")
 
-# App Routing
-if not st.session_state.user_profile:
-    render_onboarding()
+# App Routing Logic
+# 1. If in Edit Mode OR No Profile -> Show Form
+if st.session_state.editing_profile or not st.session_state.user_profile:
+    render_profile_form(st.session_state.user_profile)
+
+# 2. Main App (Profile exists and not editing)
 else:
     # Navigation
     if not st.session_state.accessibility_mode:
-        # Standard Sidebar Nav
         st.sidebar.title("Navigation")
         page = st.sidebar.radio("Go to", ["Daily Dashboard", "Exercise Library", "My Progress"])
     else:
-        # Accessible Top Nav (easier for screen readers than sidebar sometimes)
         page = st.radio("Navigation", ["Daily Dashboard", "Exercise Library", "My Progress"], horizontal=True)
 
     user_profile = st.session_state.user_profile
@@ -324,8 +372,18 @@ else:
             st.markdown(f"**Quote:** *{quote}*")
             st.markdown(f"**Coach:** {ai_msg}")
 
-        # Plan Generation
-        todays_plan = generate_workout_plan(user_profile)
+        # Plan Logic: Create or Retrieve
+        if 'current_plan' not in st.session_state:
+            st.session_state.current_plan = generate_workout_plan(user_profile)
+        
+        # Generate New Button
+        col_act1, col_act2 = st.columns([1,3])
+        with col_act1:
+            if st.button("🔄 New Routine"):
+                st.session_state.current_plan = generate_workout_plan(user_profile)
+                st.rerun()
+
+        todays_plan = st.session_state.current_plan
         
         if not todays_plan:
             st.warning("No perfect matches found for your equipment, showing general mobility.")
@@ -336,7 +394,7 @@ else:
             render_workout_card(ex, show_audio=st.session_state.accessibility_mode)
             
         st.write("---")
-        if st.button("✅ I Completed Today's Workout", use_container_width=True):
+        if st.button("✅ I Completed This Workout", use_container_width=True):
             update_streak()
             st.balloons()
             st.success("Great job! Streak updated.")
