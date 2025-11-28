@@ -348,12 +348,27 @@ def render_onboarding(is_edit=False):
     if is_edit:
         st.header("✏️ Edit Your Profile")
         btn_label = "Update Profile"
+        # Standard container for Edit Mode
+        container = st.container(border=True)
     else:
-        st.title("Welcome to FitBod 🥑")
-        st.markdown("### Let's design your accessible fitness journey.")
+        # --- NEW FANCIER FIRST SCREEN ---
+        st.markdown(
+            """
+            <div style="text-align: center; padding: 40px 0; background: linear-gradient(180deg, rgba(220,252,231,0) 0%, rgba(220,252,231,0.5) 100%); border-radius: 20px; margin-bottom: 30px;">
+                <h1 style="font-size: 4rem; margin-bottom: 0; background: -webkit-linear-gradient(45deg, #166534, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">FitBod 🥑</h1>
+                <h3 style="font-weight: 300; font-style: italic; color: #374151; margin-top: 10px;">Empowering Movement. No Limits.</h3>
+                <p style="font-size: 1.2rem; color: #4b5563; max-width: 600px; margin: 20px auto;">
+                    Your personalized, adaptive fitness companion. Designed for every body, every ability, and every goal.
+                </p>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+        st.markdown("### Let's design your journey 👇")
         btn_label = "Start My Journey"
+        container = st.container(border=True)
 
-    with st.container(border=True):
+    with container:
         with st.form("profile_form"):
             # 1. Basics
             st.subheader("1. The Basics")
@@ -530,9 +545,18 @@ def render_dashboard():
         c1, c2 = st.columns(2)
         with c1:
             st.info("💡 **Tip:** Tracking how you feel helps us adjust future intensity.")
-            feeling = st.text_area("How are you feeling?", placeholder="I feel energized / tired / proud...")
+            feeling = st.text_area("How are you feeling?", key="journal_input", placeholder="I feel energized / tired / proud...")
+            
             if st.button("💾 Save to Journal"):
-                st.toast("Journal Entry Saved!")
+                if feeling:
+                    entry = {
+                        "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+                        "note": feeling
+                    }
+                    st.session_state.journal_entries.append(entry)
+                    st.toast("Journal Entry Saved!")
+                else:
+                    st.error("Please write something to save!")
         
         with c2:
             st.markdown("### What's Next?")
@@ -605,8 +629,14 @@ def render_progress():
     st.subheader("Weekly Activity")
     st.bar_chart(df.set_index("Day"))
     
-    with st.expander("Journal History"):
-        st.write("No journal entries yet. Complete a workout to add one!")
+    st.subheader("📝 Journal History")
+    if st.session_state.journal_entries:
+        for entry in reversed(st.session_state.journal_entries):
+            with st.container(border=True):
+                st.caption(f"📅 {entry['date']}")
+                st.write(entry['note'])
+    else:
+        st.info("No journal entries yet. Complete a workout to add one!")
 
 def render_nutrition_premium():
     """NEW PREMIUM FEATURE PAGE"""
@@ -740,6 +770,7 @@ if 'hydration' not in st.session_state: st.session_state.hydration = 0
 if 'accessibility_mode' not in st.session_state: st.session_state.accessibility_mode = False
 if 'premium_unlocked' not in st.session_state: st.session_state.premium_unlocked = False
 if 'workout_completed' not in st.session_state: st.session_state.workout_completed = False
+if 'journal_entries' not in st.session_state: st.session_state.journal_entries = []
 
 # Apply Styles
 inject_custom_css(st.session_state.accessibility_mode)
