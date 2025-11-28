@@ -10,9 +10,9 @@ from gtts import gTTS
 # --- 1. CONFIGURATION & DATA ---
 
 st.set_page_config(
-    page_title="FitBod",
+    page_title="FitBod - Accessible Fitness",
     page_icon="🥑",
-    layout="centered",  # Centered layout mimics a mobile app screen on desktop
+    layout="wide",
     initial_sidebar_state="collapsed"
 )
 
@@ -32,13 +32,12 @@ EXERCISE_LIBRARY = [
     ],
     "safety_note": "Keep your core engaged to protect your lower back. Stop if you feel sharp pain.",
     "calories": 40,
-    "duration_minutes": 5,
-    "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&auto=format&fit=crop"
+    "duration_minutes": 5
   },
   {
     "id": "seated_march",
     "title": "Seated High Knees",
-    "category": "Cardio",
+    "category": "Cardio for Wheelchair Users",
     "tags": ["Wheelchair User", "Limited Lower-Body Mobility", "Cardio", "Endurance", "None"],
     "intensity": "Energetic",
     "instructions": [
@@ -49,13 +48,12 @@ EXERCISE_LIBRARY = [
     ],
     "safety_note": "Ensure your chair is stable and brakes are on.",
     "calories": 60,
-    "duration_minutes": 10,
-    "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop"
+    "duration_minutes": 10
   },
   {
     "id": "wall_pushup",
     "title": "Wall Push-Ups",
-    "category": "Upper Body",
+    "category": "Upper Body Only",
     "tags": ["Limited Lower-Body Mobility", "Strength", "Balance", "None"],
     "intensity": "Moderate",
     "instructions": [
@@ -66,13 +64,12 @@ EXERCISE_LIBRARY = [
     ],
     "safety_note": "Ensure non-slip footwear. Keep your body in a straight line.",
     "calories": 50,
-    "duration_minutes": 5,
-    "image": "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=800&auto=format&fit=crop"
+    "duration_minutes": 5
   },
   {
     "id": "neck_stretches",
     "title": "Gentle Neck Release",
-    "category": "Mobility",
+    "category": "Mobility & Stretch",
     "tags": ["Visual Impairment", "Neurodivergent Support", "Mobility", "Gentle", "None", "Chair"],
     "intensity": "Gentle",
     "instructions": [
@@ -83,13 +80,12 @@ EXERCISE_LIBRARY = [
     ],
     "safety_note": "Move slowly. Do not force your head down.",
     "calories": 10,
-    "duration_minutes": 3,
-    "image": "https://images.unsplash.com/photo-1544367563-12123d8965cd?w=800&auto=format&fit=crop"
+    "duration_minutes": 3
   },
   {
     "id": "band_pull_apart",
-    "title": "Resistance Band Pulls",
-    "category": "Upper Body",
+    "title": "Resistance Band Pull-Aparts",
+    "category": "Upper Body Only",
     "tags": ["Wheelchair User", "Strength", "Resistance Bands"],
     "intensity": "Moderate",
     "instructions": [
@@ -99,13 +95,12 @@ EXERCISE_LIBRARY = [
     ],
     "safety_note": "Don't shrug your shoulders. Keep neck relaxed.",
     "calories": 45,
-    "duration_minutes": 5,
-    "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&auto=format&fit=crop"
+    "duration_minutes": 5
   },
   {
     "id": "chair_squats",
     "title": "Sit-to-Stand",
-    "category": "Lower Body",
+    "category": "Lower Body Only",
     "tags": ["Limited Upper-Body Mobility", "Strength", "Balance", "Chair"],
     "intensity": "Energetic",
     "instructions": [
@@ -116,18 +111,18 @@ EXERCISE_LIBRARY = [
     ],
     "safety_note": "Ensure the chair will not slide backwards.",
     "calories": 70,
-    "duration_minutes": 8,
-    "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&auto=format&fit=crop"
+    "duration_minutes": 8
   }
 ]
 
 QUOTES = [
-    "Small steps, big changes.",
-    "Listen to your body.",
+    "Small steps every day lead to big changes.",
+    "Listen to your body, it knows what it can do.",
     "Your pace is the best pace.",
-    "Fitness is for every body.",
-    "You showed up, that's a win.",
-    "Focus on what you CAN do."
+    "Fitness is for everybody and every body.",
+    "You showed up today, and that is a victory.",
+    "Focus on what you CAN do.",
+    "Believe in yourself and all that you are."
 ]
 
 # --- 2. STYLE & THEME ENGINE ---
@@ -135,7 +130,7 @@ QUOTES = [
 def inject_custom_css(mode_active):
     """
     Injects CSS. 
-    Standard Mode: Modern 'Social App' Aesthetic (Clean, White, Rounded, Shadows).
+    Standard Mode: Modern Gradient Theme (Teal/Emerald/Slate).
     Accessibility Mode: High Contrast, Large Text.
     """
     if mode_active:
@@ -146,151 +141,184 @@ def inject_custom_css(mode_active):
             @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
             
             html, body, [class*="css"], p, div, h1, h2, h3 { 
-                font-size: 22px !important; 
+                font-size: 24px !important; 
                 font-family: 'Atkinson Hyperlegible', sans-serif !important; 
                 line-height: 1.6 !important;
                 color: #FFFFFF !important;
-                background-color: #000000 !important;
             }
             .stApp { background-color: #000000 !important; }
             
-            /* High Contrast Elements */
+            /* High Contrast Interactive Elements */
             .stButton > button { 
                 background-color: #FFFF00 !important; 
                 color: #000000 !important; 
                 border: 4px solid #FFFFFF !important; 
                 font-weight: bold !important; 
-                padding: 15px !important; 
+                font-size: 26px !important; 
+                padding: 20px !important; 
                 border-radius: 0px !important;
-                margin-bottom: 10px !important;
+                margin-bottom: 15px !important;
+            }
+            .stButton > button:hover {
+                background-color: #FFFFFF !important;
+                border-color: #FFFF00 !important;
             }
             
-            /* Containers */
-            div[data-testid="stContainer"] {
-                border: 2px solid #FFFF00 !important;
-                margin-bottom: 20px !important;
-                background-color: #000000 !important;
+            /* High Contrast Containers */
+            div[data-testid="stMetric"], div[data-testid="stExpander"], div[data-testid="stContainer"] {
+                background-color: #1a1a1a !important; 
+                border: 3px solid #FFFF00 !important; 
+                border-radius: 0px !important;
             }
             
-            h1, h2, h3 { 
+            h1, h2, h3, h4 { 
                 color: #FFFF00 !important; 
                 text-decoration: underline; 
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+            .stSuccess, .stInfo, .stWarning { 
+                background-color: #333333 !important; 
+                color: #FFFF00 !important; 
+                border-left: 10px solid #FFFFFF !important;
             }
             </style>
             """,
             unsafe_allow_html=True
         )
     else:
-        # --- MODERN SOCIAL APP MODE ---
+        # --- MODERN UX MODE ---
         st.markdown(
             """
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;700&display=swap');
             
-            /* GLOBAL RESET */
+            /* Global Reset & Font */
             html, body, [class*="css"] {
-                font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-                color: #111827;
-                background-color: #fafafa;
+                font-family: 'Inter', sans-serif;
+                color: #1e293b; /* Slate 800 */
             }
             
+            /* Background */
             .stApp {
-                background-color: #fafafa; /* Light Grey Background */
+                background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); /* Teal to Sky light gradient */
             }
             
-            /* HEADER STYLING */
+            /* Headers */
+            h1, h2, h3 {
+                font-family: 'Poppins', sans-serif;
+                color: #0f766e; /* Teal 700 */
+                font-weight: 700;
+            }
+            
             h1 {
-                font-weight: 800;
-                font-size: 2rem;
-                letter-spacing: -0.025em;
-                color: #111827;
-                margin-bottom: 0.5rem;
+                background: linear-gradient(120deg, #0d9488, #0f766e);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
             
-            h3 {
-                font-weight: 600;
-                font-size: 1.1rem;
-                color: #374151;
-            }
-            
-            /* STORIES / QUICK ACTIONS */
-            /* We simulate stories with circular buttons if possible, but standard buttons work too */
-            
-            /* CARD DESIGN (FEED STYLE) */
-            div[data-testid="stContainer"] {
+            /* Modern Cards (Glassmorphism-lite) */
+            div[data-testid="stContainer"], div[data-testid="stMetric"], div[data-testid="stExpander"] {
                 background: #ffffff;
-                border-radius: 20px;
-                border: 1px solid #f3f4f6;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-                padding: 20px;
-                margin-bottom: 24px;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                padding: 1.5rem;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
             }
             
-            /* BUTTONS - PILL SHAPE & GRADIENT */
+            div[data-testid="stContainer"]:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            }
+            
+            /* Metrics */
+            div[data-testid="stMetric"] label {
+                color: #64748b; /* Slate 500 */
+                font-size: 0.9rem;
+            }
+            div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
+                color: #0f766e;
+                font-weight: 800;
+            }
+            
+            /* Primary Buttons */
             .stButton > button {
-                border-radius: 9999px; /* Pill shape */
-                background: #111827; /* Dark elegant black/blue */
+                background: linear-gradient(to right, #0d9488, #0f766e);
                 color: white;
-                font-weight: 600;
                 border: none;
-                padding: 10px 24px;
-                transition: transform 0.1s ease;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                border-radius: 12px;
+                padding: 0.6rem 1.2rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 4px 6px rgba(13, 148, 136, 0.2);
+                width: 100%;
             }
             
             .stButton > button:hover {
-                background: #374151;
-                transform: scale(1.02);
+                background: linear-gradient(to right, #14b8a6, #0d9488);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 15px rgba(13, 148, 136, 0.3);
                 color: white !important;
             }
             
-            /* Secondary Buttons (Outlined) */
-            button[kind="secondary"] {
-                background: white;
-                color: #111827 !important;
-                border: 2px solid #e5e7eb;
-                box-shadow: none;
+            .stButton > button:active {
+                transform: translateY(0);
             }
             
-            /* NAVIGATION BAR SIMULATION */
-            /* We style the top columns to look like tabs */
-            div[data-testid="column"] button {
-                background: transparent;
-                color: #9ca3af; /* Inactive Grey */
-                box-shadow: none;
-                padding: 0px;
-                font-size: 0.9rem;
-            }
-            div[data-testid="column"] button:hover {
-                background: transparent;
-                color: #111827; /* Active Black */
-                transform: none;
-            }
-            div[data-testid="column"] button:focus {
-                color: #10b981; /* Active Green */
+            /* Premium Button Style (Gold) */
+            button[kind="secondary"] {
+                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                color: white !important;
+                border: none;
             }
 
-            /* INPUTS - MINIMALIST */
-            .stTextInput input, .stSelectbox div[data-baseweb="select"] {
-                border-radius: 12px;
-                border: 1px solid #e5e7eb;
-                background-color: #f9fafb;
-                padding: 10px;
+            /* Inputs */
+            .stTextInput input, .stSelectbox div[data-baseweb="select"], .stMultiSelect div[data-baseweb="select"] {
+                background-color: #ffffff;
+                border: 1px solid #cbd5e1;
+                border-radius: 10px;
+                color: #334155;
             }
             
-            /* SUCCESS MESSAGES */
-            .stSuccess {
-                background-color: #ecfdf5;
-                color: #065f46;
+            /* Navigation Bar Simulation */
+            div[data-testid="column"] button {
+                background: transparent;
+                color: #475569;
+                box-shadow: none;
+                border: 1px solid transparent;
+            }
+            
+            div[data-testid="column"] button:hover {
+                background: #e0f2fe;
+                color: #0f766e;
+                box-shadow: none;
+                transform: none;
+                border: 1px solid #ccfbf1;
+            }
+
+            /* Expander Header */
+            .streamlit-expanderHeader {
+                font-family: 'Poppins', sans-serif;
+                color: #334155;
+                font-weight: 600;
+            }
+            
+            /* Success/Info Messages */
+            .stSuccess, .stInfo, .stWarning {
+                border-radius: 12px;
                 border: none;
-                border-radius: 12px;
+                color: #334155;
             }
-            
-            /* HIDE DEFAULT STREAMLIT ELEMENTS */
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            
+            .stSuccess {
+                background-color: #d1fae5;
+                border-left: 5px solid #10b981;
+            }
+            .stInfo {
+                background-color: #e0f2fe;
+                border-left: 5px solid #0ea5e9;
+            }
             </style>
             """,
             unsafe_allow_html=True
@@ -307,7 +335,7 @@ def get_audio_html(text):
         audio_base64 = base64.b64encode(mp3_fp.read()).decode()
         return f'<audio controls src="data:audio/mp3;base64,{audio_base64}" style="width: 100%; margin-top: 10px;"></audio>'
     except:
-        return "<small>Audio unavailable.</small>"
+        return "<small>Audio unavailable in offline mode.</small>"
 
 def generate_workout_plan(user_profile):
     disability = user_profile.get('disability', [])
@@ -318,11 +346,15 @@ def generate_workout_plan(user_profile):
     for ex in EXERCISE_LIBRARY:
         score = 0
         if any(tag in ex['tags'] for tag in disability): score += 2
+        
         required_eq = [t for t in ex['tags'] if t in ["Resistance Bands", "Light Weights", "Chair"]]
         has_eq = all(eq in equipment for eq in required_eq)
+        
         if has_eq or "None" in ex['tags']: score += 1
         else: score = -10
+            
         if goal in ex['tags'] or goal in ex['category']: score += 1
+        
         if score > 0: suitable.append(ex)
     
     if len(suitable) >= 3: return random.sample(suitable, 3)
@@ -330,249 +362,478 @@ def generate_workout_plan(user_profile):
 
 def get_greeting(name):
     hour = datetime.datetime.now().hour
-    if hour < 12: msg = "Good morning"
-    elif hour < 18: msg = "Good afternoon"
-    else: msg = "Good evening"
-    return f"{msg}, {name}" if name else msg
+    if hour < 12: msg = "Good Morning"
+    elif hour < 18: msg = "Good Afternoon"
+    else: msg = "Good Evening"
+    return f"{msg}, {name}!" if name else msg
 
-# --- 4. NAVIGATION ---
+# --- 4. NAVIGATION HANDLER ---
 
 def navigate_to(page):
     st.session_state.current_page = page
     st.rerun()
 
-def render_tab_nav():
-    """Simulates a mobile app Tab Bar at the top."""
+def render_navbar():
+    """Renders a modern top navigation bar using columns and buttons."""
     st.markdown("---")
-    # Using columns for the nav icons
-    col1, col2, col3, col4, col5 = st.columns(5)
+    # 6 columns to accommodate the new Premium/Nutrition tab
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     
-    # Simple Text Icons for Clean Look
     with col1:
-        if st.button("🏠\nHome", key="nav_home", use_container_width=True): navigate_to("Dashboard")
+        if st.button("🏠 Home", use_container_width=True):
+            navigate_to("Dashboard")
     with col2:
-        if st.button("💪\nLibrary", key="nav_lib", use_container_width=True): navigate_to("Library")
+        if st.button("💪 Library", use_container_width=True):
+            navigate_to("Library")
     with col3:
-        if st.button("📊\nStats", key="nav_prog", use_container_width=True): navigate_to("Progress")
+        if st.button("📈 Progress", use_container_width=True):
+            navigate_to("Progress")
     with col4:
-        if st.button("🥗\nFood", key="nav_food", use_container_width=True): navigate_to("Nutrition")
+        if st.button("🥦 Nutrition", use_container_width=True): # New Premium Hook
+            navigate_to("Nutrition")
     with col5:
-        if st.button("👤\nProfile", key="nav_set", use_container_width=True): navigate_to("Settings")
+        if st.button("🤝 Sponsors", use_container_width=True): 
+            navigate_to("Sponsors")
+    with col6:
+        if st.button("⚙️ Settings", use_container_width=True):
+            navigate_to("Settings")
     st.markdown("---")
 
-# --- 5. COMPONENT RENDERERS ---
+# --- 5. COMPONENTS ---
 
-def render_story_bubble(emoji, label, action_key):
-    """Renders a 'Story' style action bubble."""
-    if st.button(f"{emoji}\n{label}", key=action_key, use_container_width=True):
-        return True
-    return False
+def render_onboarding(is_edit=False):
+    profile = st.session_state.user_profile if is_edit else {}
+    
+    if is_edit:
+        st.header("✏️ Edit Your Profile")
+        btn_label = "Update Profile"
+        # Standard container for Edit Mode
+        container = st.container(border=True)
+    else:
+        # --- NEW FANCIER FIRST SCREEN ---
+        st.markdown(
+            """
+            <div style="text-align: center; padding: 40px 0; background: linear-gradient(180deg, rgba(220,252,231,0) 0%, rgba(220,252,231,0.5) 100%); border-radius: 20px; margin-bottom: 30px;">
+                <h1 style="font-size: 4rem; margin-bottom: 0; background: -webkit-linear-gradient(45deg, #166534, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">FitBod 🥑</h1>
+                <h3 style="font-weight: 300; font-style: italic; color: #374151; margin-top: 10px;">Empowering Movement. No Limits.</h3>
+                <p style="font-size: 1.2rem; color: #4b5563; max-width: 600px; margin: 20px auto;">
+                    Your personalized, adaptive fitness companion. Designed for every body, every ability, and every goal.
+                </p>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+        st.markdown("### Let's design your journey 👇")
+        btn_label = "Start My Journey"
+        container = st.container(border=True)
 
-def render_workout_post(exercise, index):
-    """Renders an exercise like a social media post card."""
-    with st.container():
-        # User Header (Simulated)
-        c1, c2 = st.columns([1, 5])
-        with c1:
-            st.markdown("🥑") # Avatar placeholder
-        with c2:
-            st.markdown(f"**FitBod Coach** • {exercise['category']}")
-            st.caption(f"{exercise['intensity']} Intensity • {exercise['duration_minutes']} min")
-        
-        # Image / Visual
-        if 'image' in exercise:
-            st.image(exercise['image'], use_container_width=True)
-        else:
-            st.markdown(f"### {exercise['title']}")
+    with container:
+        with st.form("profile_form"):
+            # 1. Basics
+            st.subheader("1. The Basics")
+            col_basic1, col_basic2 = st.columns(2)
+            with col_basic1:
+                name = st.text_input("First Name", value=profile.get("name", ""))
+            with col_basic2:
+                age_group = st.selectbox(
+                    "Age Category", 
+                    ["Under 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"],
+                    index=2 if not profile else ["Under 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"].index(profile.get("age_group", "25-34"))
+                )
 
-        # Content
-        st.markdown(f"**{exercise['title']}**")
-        with st.expander("Read Instructions"):
-            for i, step in enumerate(exercise['instructions']):
-                st.write(f"{i+1}. {step}")
-            st.info(f"🛡️ Safety: {exercise['safety_note']}")
+            # 2. Comprehensive Access Needs
+            st.subheader("2. Access & Mobility Needs")
+            st.caption("Select all that apply. We use this to filter unsafe exercises.")
             
-        # Actions
-        ac1, ac2 = st.columns([4, 1])
-        with ac1:
-            # Audio in 'Social' mode might be an icon
-            if st.session_state.accessibility_mode:
-                 text = f"{exercise['title']}. {'. '.join(exercise['instructions'])}."
-                 st.markdown(get_audio_html(text), unsafe_allow_html=True)
-        with ac2:
-            st.button("❤️", key=f"like_{exercise['id']}_{index}", help="Mark as favorite")
+            access_options = [
+                "Wheelchair User (Manual)",
+                "Wheelchair User (Power)",
+                "Limited Upper-Body Mobility",
+                "Limited Lower-Body Mobility",
+                "Limited Grip Strength",
+                "Balance Issues / Vertigo",
+                "Chronic Pain / Fatigue",
+                "Visual Impairment (Low Vision)",
+                "Visual Impairment (Blind)",
+                "Neurodivergent (Autism/ADHD)",
+                "Sensory Sensitivity (Low Noise)",
+                "Post-Injury Recovery",
+                "None / General Fitness"
+            ]
+            
+            disability_default = profile.get("disability", [])
+            # Filter default to ensure they exist in new options list to avoid errors
+            safe_default = [x for x in disability_default if x in access_options]
+            
+            disability = st.multiselect(
+                "I identify with / require support for:",
+                access_options,
+                default=safe_default
+            )
 
-# --- 6. PAGE VIEWS ---
+            # 3. Goals & Equipment
+            col_a, col_b = st.columns(2)
+            with col_a:
+                st.subheader("3. Fitness Goal")
+                goal_opts = ["Strength", "Mobility & Flexibility", "Balance & Stability", "Cardiovascular Health", "Weight Management", "Mental Wellbeing", "Confidence Building"]
+                try:
+                    idx = goal_opts.index(profile.get("goal", "Mobility & Flexibility"))
+                except:
+                    idx = 1
+                goal = st.selectbox("Main Focus", goal_opts, index=idx)
+            
+            with col_b:
+                st.subheader("4. Available Equipment")
+                eq_opts = ["Resistance Bands", "Light Weights (Dumbbells)", "Heavy Weights", "Chair (Sturdy)", "Yoga Mat", "None (Bodyweight Only)"]
+                # Sanitize defaults
+                def_eq = profile.get("equipment", [])
+                safe_eq = [x for x in def_eq if x in eq_opts]
+                equipment = st.multiselect("Select what you have:", eq_opts, default=safe_eq)
+
+            # 5. Lifestyle & Preferences (Premium Hook Data)
+            st.subheader("5. Lifestyle & Preferences")
+            col_l1, col_l2 = st.columns(2)
+            with col_l1:
+                style_idx = ["Gentle", "Direct", "Energetic"].index(profile.get("style", "Gentle")) if "style" in profile else 0
+                style = st.select_slider("Coaching Style", ["Gentle", "Direct", "Energetic"], value=["Gentle", "Direct", "Energetic"][style_idx])
+            with col_l2:
+                diet_opts = ["No Preference", "Vegetarian", "Vegan", "Gluten-Free", "Keto", "High Protein"]
+                diet_def = profile.get("diet", "No Preference")
+                diet = st.selectbox("Dietary Preference (for Meal Plans)", diet_opts, index=diet_opts.index(diet_def) if diet_def in diet_opts else 0)
+
+            submitted = st.form_submit_button(btn_label, use_container_width=True)
+            
+            if submitted:
+                if not name:
+                    st.error("Please enter your name!")
+                else:
+                    st.session_state.user_profile = {
+                        "name": name,
+                        "age_group": age_group,
+                        "disability": disability,
+                        "goal": goal,
+                        "equipment": equipment,
+                        "style": style,
+                        "diet": diet
+                    }
+                    st.session_state.current_page = "Dashboard"
+                    if 'current_plan' in st.session_state: del st.session_state.current_plan
+                    st.rerun()
+
+def render_workout_card(exercise):
+    """Modern Card Design for exercises"""
+    with st.container():
+        # Header
+        c1, c2 = st.columns([3, 1])
+        with c1:
+            st.markdown(f"### {exercise['title']}")
+            st.markdown(f"**{exercise['category']}** • *{exercise['intensity'].title()} Intensity*")
+        with c2:
+            st.markdown(f"## ⏱️ {exercise['duration_minutes']}m")
+        
+        st.divider()
+        
+        # Content
+        ic1, ic2 = st.columns([2, 1])
+        with ic1:
+            st.markdown("#### Instructions")
+            for i, step in enumerate(exercise['instructions']):
+                st.write(f"**{i+1}.** {step}")
+        
+        with ic2:
+            st.markdown("#### Safety First 🛡️")
+            st.info(exercise['safety_note'])
+            st.markdown(f"🔥 **{exercise['calories']} kcal**")
+        
+        # Audio Player
+        if st.session_state.accessibility_mode:
+            text = f"{exercise['title']}. {'. '.join(exercise['instructions'])}."
+            st.markdown(get_audio_html(text), unsafe_allow_html=True)
+
+# --- 6. PAGE RENDERERS ---
 
 def render_dashboard():
     profile = st.session_state.user_profile
+    greeting = get_greeting(profile.get('name', 'Friend'))
     
-    # 1. Header (Instagram Style)
-    c1, c2 = st.columns([3, 1])
-    with c1:
-        st.markdown(f"### {get_greeting(profile.get('name', 'Friend'))}")
-    with c2:
-        st.caption(f"🔥 {st.session_state.streak} Day Streak")
-    
-    # 2. Stories / Quick Actions Row
-    st.markdown("#### Daily Habits")
-    sc1, sc2, sc3, sc4 = st.columns(4)
-    with sc1:
-        if render_story_bubble("💧", "Hydrate", "act_water"):
-            st.session_state.hydration += 1
-            st.toast("Water logged! 💧")
-    with sc2:
-        if render_story_bubble("📓", "Journal", "act_journal"):
-            # Minimal inline journal
-            st.session_state.show_journal_modal = True
-    with sc3:
-         if render_story_bubble("🔄", "Refresh", "act_refresh"):
-             st.session_state.current_plan = generate_workout_plan(profile)
-             st.session_state.workout_completed = False
-             st.rerun()
-    with sc4:
-        st.markdown(f"<div style='text-align:center; font-size:0.8rem; color:grey; margin-top:10px;'>{st.session_state.hydration}/8<br>Cups</div>", unsafe_allow_html=True)
+    # 1. Hero Section & Motivation
+    col_head, col_img = st.columns([3, 1])
+    with col_head:
+        st.title(greeting)
+        
+        # PROMINENT QUOTE DISPLAY
+        quote = random.choice(QUOTES)
+        st.markdown(
+            f"""
+            <div style="background-color: #0f766e; padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #fbbf24; margin:0; font-family: 'Poppins', sans-serif;">✨ Daily Motivation</h3>
+                <p style="font-size: 1.3em; font-style: italic; margin-top: 10px; color: #f0fdfa;">"{quote}"</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        # Display Goal Tag
+        st.markdown(f"**Current Focus:** `{profile.get('goal', 'General Fitness')}`")
+    with col_img:
+        st.metric("Current Streak", f"🔥 {st.session_state.streak}")
 
-    # 3. Journal Modal (Simulated)
-    if st.session_state.get('show_journal_modal', False):
-        with st.container():
-            st.info("✍️ Quick Journal")
-            note = st.text_input("How do you feel?", placeholder="Type here...")
-            if st.button("Post Entry"):
-                if note:
-                    st.session_state.journal_entries.append({"date": datetime.datetime.now().strftime("%d %b"), "note": note})
-                    st.toast("Posted to Journal!")
-                    st.session_state.show_journal_modal = False
-                    st.rerun()
-                if st.button("Cancel"):
-                    st.session_state.show_journal_modal = False
-                    st.rerun()
+    # 2. Quick Actions
+    with st.container():
+        hc1, hc2, hc3 = st.columns(3)
+        with hc1:
+            st.metric("Hydration Tracker 💧", f"{st.session_state.hydration} / 8 glasses")
+        with hc2:
+            if st.button("➕ Drink Water", use_container_width=True):
+                st.session_state.hydration += 1
+                st.rerun()
+        with hc3:
+            if st.button("🔄 New Routine", use_container_width=True):
+                st.session_state.current_plan = generate_workout_plan(profile)
+                st.session_state.workout_completed = False # Reset state
+                st.rerun()
 
-    st.write("") # Spacer
+    st.markdown("---")
 
-    # 4. Main Feed (Workout Plan)
-    st.markdown("#### Your Feed")
-    
+    # 3. Post-Workout Logic OR Workout View
     if st.session_state.workout_completed:
-        with st.container():
-            st.markdown("### 🎉 You're all caught up!")
-            st.image("https://images.unsplash.com/photo-1499540633137-7d63ae0e8f16?w=800&auto=format&fit=crop", use_container_width=True)
-            st.success("Daily workout completed.")
-            if st.button("Start Bonus Round"):
+        # POST WORKOUT VIEW
+        st.balloons()
+        st.markdown("## 🎉 Amazing Job, " + profile.get('name', 'Friend') + "!")
+        st.success("You've completed your daily routine. Take a moment to rest and reflect.")
+        
+        c1, c2 = st.columns(2)
+        with c1:
+            st.info("💡 **Tip:** Tracking how you feel helps us adjust future intensity.")
+            feeling = st.text_area("How are you feeling?", key="journal_input", placeholder="I feel energized / tired / proud...")
+            
+            # Action Buttons Row
+            col_save, col_view = st.columns([1, 1])
+            with col_save:
+                if st.button("💾 Save to Journal"):
+                    if feeling:
+                        entry = {
+                            "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+                            "note": feeling
+                        }
+                        st.session_state.journal_entries.append(entry)
+                        st.session_state.last_saved_feeling = True # Flag to show success
+                        st.toast("Journal Entry Saved!")
+                    else:
+                        st.error("Please write something to save!")
+            
+            # Show success and offer navigation if saved
+            if st.session_state.get('last_saved_feeling', False):
+                with col_view:
+                    st.success("Saved!")
+                if st.button("📖 View in Progress Tab"):
+                    st.session_state.last_saved_feeling = False # Reset
+                    navigate_to("Progress")
+        
+        with c2:
+            st.markdown("### What's Next?")
+            if st.button("📈 View Progress Stats", use_container_width=True):
+                navigate_to("Progress")
+            
+            st.write("")
+            if st.button("🔄 Generate Another Workout", use_container_width=True):
                 st.session_state.workout_completed = False
                 st.session_state.current_plan = generate_workout_plan(profile)
                 st.rerun()
+
     else:
+        # WORKOUT CARD VIEW
+        st.markdown("### Today's Personalized Plan")
+        
         if 'current_plan' not in st.session_state:
             st.session_state.current_plan = generate_workout_plan(profile)
-        
+            
         plan = st.session_state.current_plan
         
-        for idx, ex in enumerate(plan):
-            render_workout_post(ex, idx)
-        
-        # Complete Button fixed at bottom of feed
-        if st.button("✅ Mark Workout Complete", type="primary", use_container_width=True):
+        if not plan:
+            st.warning("We're adjusting parameters to find the best fit. Here is a mobility starter.")
+            plan = [ex for ex in EXERCISE_LIBRARY if "Mobility" in ex['tags']][:2]
+
+        # Render Cards
+        for ex in plan:
+            render_workout_card(ex)
+            st.write("") # spacer
+
+        if st.button("✅ Complete Workout", type="primary", use_container_width=True):
             st.session_state.streak += 1
-            st.session_state.workout_completed = True
-            st.balloons()
+            st.session_state.workout_completed = True # TRIGGER POST WORKOUT VIEW
             st.rerun()
 
 def render_library():
-    st.markdown("### 📚 Explore")
-    search = st.text_input("Search", placeholder="Find exercises...")
+    st.title("📚 Exercise Library")
+    st.write("Browse all accessible exercises.")
     
-    # Categories as horizontal pills (simulated)
-    cols = st.columns(4)
-    cats = ["All", "Cardio", "Strength", "Mobility"]
-    selected_cat = "All"
-    # Basic implementation of filters
+    col_search, col_filter = st.columns([2, 1])
+    with col_search:
+        search_term = st.text_input("Search exercises...", placeholder="e.g. 'shoulder'")
+    with col_filter:
+        cat_filter = st.selectbox("Category", ["All"] + list(set(e['category'] for e in EXERCISE_LIBRARY)))
     
     filtered = EXERCISE_LIBRARY
-    if search:
-        filtered = [e for e in filtered if search.lower() in e['title'].lower()]
+    if cat_filter != "All":
+        filtered = [e for e in filtered if e['category'] == cat_filter]
+    if search_term:
+        filtered = [e for e in filtered if search_term.lower() in e['title'].lower()]
         
-    # Grid Layout for Library
-    for i in range(0, len(filtered), 2):
-        c1, c2 = st.columns(2)
-        if i < len(filtered):
-            with c1:
-                with st.container():
-                    st.image(filtered[i].get('image', 'https://via.placeholder.com/150'), use_container_width=True)
-                    st.caption(filtered[i]['title'])
-        if i+1 < len(filtered):
-            with c2:
-                with st.container():
-                    st.image(filtered[i+1].get('image', 'https://via.placeholder.com/150'), use_container_width=True)
-                    st.caption(filtered[i+1]['title'])
+    for ex in filtered:
+        render_workout_card(ex)
 
 def render_progress():
-    st.markdown("### 📊 Activity Stats")
+    st.title("📈 Your Progress")
     
-    # Modern Stats Grid
-    c1, c2 = st.columns(2)
-    with c1:
-        with st.container():
-            st.metric("Streak", f"{st.session_state.streak}", delta="Days")
-    with c2:
-        with st.container():
-            st.metric("Workouts", f"{st.session_state.streak}", delta="+1")
-            
-    st.markdown("#### History")
+    data = {
+        "Day": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        "Workouts": [1, 0, 1, 1, 0, 1, 0] # Mock data
+    }
+    df = pd.DataFrame(data)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Total Active Minutes", f"{st.session_state.streak * 15} mins")
+    with col2:
+        st.metric("Total Calories Burned", f"{st.session_state.streak * 120} kcal")
+        
+    st.subheader("Weekly Activity")
+    st.bar_chart(df.set_index("Day"))
+    
+    st.subheader("📝 Journal History")
     if st.session_state.journal_entries:
         for entry in reversed(st.session_state.journal_entries):
-            with st.container():
-                st.markdown(f"**{entry['date']}**")
+            with st.container(border=True):
+                st.caption(f"📅 {entry['date']}")
                 st.write(entry['note'])
-                st.markdown("---")
     else:
-        st.caption("No entries yet.")
+        st.info("No journal entries yet. Complete a workout to add one!")
 
-def render_nutrition():
-    st.markdown("### 🥗 Nutrition Plans")
+def render_nutrition_premium():
+    """NEW PREMIUM FEATURE PAGE"""
+    st.title("🥦 Nutrition & Meal Plans")
+    st.write("Fuel your body with adaptive meal plans suited to your lifestyle.")
     
+    profile = st.session_state.user_profile
+    user_diet = profile.get("diet", "No Preference")
+    
+    # CHECK IF UNLOCKED
     if st.session_state.premium_unlocked:
-        st.success("Premium Active")
-        st.markdown("**Your Meal Plan**")
-        st.image("https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=800&auto=format&fit=crop", use_container_width=True)
-        st.info("Today: Quinoa Salad Bowl & Green Smoothie")
+        # UNLOCKED CONTENT
+        st.success(f"🔓 Premium Unlocked! Viewing {user_diet} Plans.")
+        
+        tab1, tab2, tab3 = st.tabs(["Daily Meals", "Shopping List", "Chat with Coach"])
+        
+        with tab1:
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                st.markdown("### 🥣 Breakfast")
+                st.image("https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=400", use_container_width=True)
+                st.info(f"**{user_diet} Power Oats**\n\n*Oats, Chia Seeds, Berries, Protein Powder*")
+            with c2:
+                st.markdown("### 🥗 Lunch")
+                st.image("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400", use_container_width=True)
+                st.info(f"**{user_diet} Energy Bowl**\n\n*Quinoa, Avocado, Chickpeas, Tahini*")
+            with c3:
+                st.markdown("### 🍲 Dinner")
+                st.image("https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400", use_container_width=True)
+                st.info(f"**{user_diet} Recovery Stew**\n\n*Lentils, Sweet Potato, Spinach, Spices*")
+                
+        with tab2:
+            st.checkbox("Oats (500g)")
+            st.checkbox("Almond Milk")
+            st.checkbox("Spinach")
+            st.checkbox("Chickpeas (2 cans)")
+            
+        with tab3:
+            st.chat_message("assistant").write("Hello! I'm your FitBod Nutrition Coach. How can I help you tweak your diet today?")
+            st.chat_message("user").write("I need more iron in my diet.")
+            st.chat_message("assistant").write("Great! Let's add more lentils and spinach to your dinner plan.")
+
     else:
-        st.markdown("**Upgrade to FitBod+**")
-        st.image("https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&auto=format&fit=crop", use_container_width=True)
-        st.write("Get personalized meal plans tailored to your needs.")
-        if st.button("Unlock for $4.99/mo", type="primary"):
-            with st.spinner("Processing..."):
-                time.sleep(1)
-                st.session_state.premium_unlocked = True
-                st.rerun()
+        # LOCKED CONTENT (TEASER)
+        st.info(f"We see you prefer a **{user_diet}** diet. We have 50+ recipes waiting for you!")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### 🥣 Breakfast Preview")
+            st.markdown(f"**{user_diet} Power Oats**\n\n*High protein, easy prep.*")
+            st.caption("Ingredients hidden...")
+            
+        with col2:
+            st.markdown("### 🥗 Lunch Preview")
+            st.markdown(f"**{user_diet} Energy Bowl**\n\n*Great for recovery.*")
+            st.caption("Ingredients hidden...")
+            
+        st.divider()
+        
+        # THE UPSELL CARD
+        with st.container():
+            st.markdown(
+                """
+                <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 30px; border-radius: 20px; text-align: center; color: white;">
+                    <h1 style="color: white !important;">🔒 Unlock FitBod Premium</h1>
+                    <p style="font-size: 1.2rem;">Get full access to personalized Meal Plans, 1-on-1 Coaching, and Advanced Analytics.</p>
+                    <ul style="list-style: none; padding: 0; font-size: 1.1rem; margin-bottom: 25px;">
+                        <li>✅ 500+ Healthy Recipes</li>
+                        <li>✅ Direct Chat with Physiotherapists</li>
+                        <li>✅ Ad-Free Experience</li>
+                    </ul>
+                    <h2 style="color: #fbbf24; margin-bottom: 20px;">Only $4.99 / month</h2>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            # We use columns to center the button visually
+            b1, b2, b3 = st.columns([1, 2, 1])
+            with b2:
+                if st.button("⭐ Get Premium Access", use_container_width=True):
+                    # SIMULATE PAYMENT
+                    with st.spinner("Processing Payment..."):
+                        time.sleep(1.5)
+                        st.session_state.premium_unlocked = True
+                        st.rerun()
 
-def render_onboarding():
-    st.markdown(
-        """
-        <div style='text-align: center; margin-bottom: 30px;'>
-            <h1 style='font-size: 3rem;'>FitBod 🥑</h1>
-            <p style='color: #6b7280;'>Your personal fitness companion.</p>
-        </div>
-        """, unsafe_allow_html=True
-    )
+def render_sponsors():
+    st.title("🤝 Our Sponsors & Partners")
+    st.write("We are proud to be supported by these accessible fitness brands. Their support keeps the core features of FitBod free for everyone.")
     
-    with st.container():
-        with st.form("onboard"):
-            name = st.text_input("First Name")
-            
-            st.markdown("### I want to focus on...")
-            goal = st.selectbox("", ["Mobility", "Strength", "Balance", "Cardio"])
-            
-            st.markdown("### I identify as...")
-            disability = st.multiselect("", ["Wheelchair User", "Limited Mobility", "Visual Impairment", "Neurodivergent", "General Fitness"])
-            
-            if st.form_submit_button("Get Started", use_container_width=True):
-                if name:
-                    st.session_state.user_profile = {"name": name, "goal": goal, "disability": disability, "equipment": []}
-                    st.rerun()
+    sponsors = [
+        {"name": "EcoHydrate", "offer": "20% OFF Smart Bottles", "desc": "Easy-grip, lightweight bottles designed for accessible hydration.", "color": "#e0f2f1"},
+        {"name": "FlexMat", "offer": "Buy 1 Get 1 Free", "desc": "Extra thick, non-slip mats perfect for chair stability and joint protection.", "color": "#f3e5f5"},
+        {"name": "ProteinPlus", "offer": "Free Sample Pack", "desc": "Plant-based nutrition shakes with easy-open caps.", "color": "#fff3e0"},
+    ]
+    
+    for s in sponsors:
+        st.markdown(
+            f"""
+            <div style="background-color: {s['color']}; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 5px solid #333;">
+                <h3 style="margin:0; color: #333;">{s['name']}</h3>
+                <h4 style="color: #d81b60; margin: 5px 0;">{s['offer']}</h4>
+                <p style="color: #555;">{s['desc']}</p>
+                <button style="background: #333; color: white; border:none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Visit Website</button>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-# --- 7. MAIN EXECUTION ---
+def render_settings():
+    st.title("⚙️ Settings")
+    
+    st.subheader("Appearance")
+    is_access = st.toggle("Accessibility Mode (High Contrast)", value=st.session_state.accessibility_mode)
+    if is_access != st.session_state.accessibility_mode:
+        st.session_state.accessibility_mode = is_access
+        st.rerun()
+        
+    st.markdown("---")
+    
+    # Profile Edit
+    render_onboarding(is_edit=True)
 
+# --- 7. MAIN EXECUTION FLOW ---
+
+# Initialize Session State
 if 'user_profile' not in st.session_state: st.session_state.user_profile = None
 if 'current_page' not in st.session_state: st.session_state.current_page = "Dashboard"
 if 'streak' not in st.session_state: st.session_state.streak = 0
@@ -581,26 +842,31 @@ if 'accessibility_mode' not in st.session_state: st.session_state.accessibility_
 if 'premium_unlocked' not in st.session_state: st.session_state.premium_unlocked = False
 if 'workout_completed' not in st.session_state: st.session_state.workout_completed = False
 if 'journal_entries' not in st.session_state: st.session_state.journal_entries = []
+if 'last_saved_feeling' not in st.session_state: st.session_state.last_saved_feeling = False
 
-# Styling
+# Apply Styles
 inject_custom_css(st.session_state.accessibility_mode)
 
-# App Flow
+# Routing Logic
 if not st.session_state.user_profile:
+    # Force Onboarding if no profile
     render_onboarding()
 else:
-    # Top Tab Navigation (Simulating App Bar)
-    render_tab_nav()
+    # Show Navigation Bar
+    render_navbar()
     
-    # Router
+    # Page Router
     page = st.session_state.current_page
-    if page == "Dashboard": render_dashboard()
-    elif page == "Library": render_library()
-    elif page == "Progress": render_progress()
-    elif page == "Nutrition": render_nutrition()
+    
+    if page == "Dashboard":
+        render_dashboard()
+    elif page == "Library":
+        render_library()
+    elif page == "Progress":
+        render_progress()
+    elif page == "Nutrition":
+        render_nutrition_premium()
+    elif page == "Sponsors":
+        render_sponsors()
     elif page == "Settings":
-        st.markdown("### Settings")
-        access = st.toggle("Accessibility Mode", value=st.session_state.accessibility_mode)
-        if access != st.session_state.accessibility_mode:
-            st.session_state.accessibility_mode = access
-            st.rerun()
+        render_settings()
