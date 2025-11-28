@@ -22,8 +22,8 @@ EXERCISE_LIBRARY = [
     "id": "seated_shoulder_press",
     "title": "Seated Shoulder Press",
     "category": "Seated Strength",
-    "tags": ["wheelchair user", "limited lower-body mobility", "upper body", "strength", "resistance bands", "light weights"],
-    "intensity": "moderate",
+    "tags": ["Wheelchair User", "Limited Lower-Body Mobility", "Upper Body", "Strength", "Resistance Bands", "Light Weights"],
+    "intensity": "Moderate",
     "instructions": [
       "Sit upright with your back supported.",
       "Hold weights or resistance band handles at shoulder height, elbows bent.",
@@ -38,8 +38,8 @@ EXERCISE_LIBRARY = [
     "id": "seated_march",
     "title": "Seated High Knees",
     "category": "Cardio for Wheelchair Users",
-    "tags": ["wheelchair user", "limited lower-body mobility", "cardio", "endurance", "none"],
-    "intensity": "energetic",
+    "tags": ["Wheelchair User", "Limited Lower-Body Mobility", "Cardio", "Endurance", "None"],
+    "intensity": "Energetic",
     "instructions": [
       "Sit tall in your chair.",
       "Lift one knee as high as comfortable, then lower it.",
@@ -54,8 +54,8 @@ EXERCISE_LIBRARY = [
     "id": "wall_pushup",
     "title": "Wall Push-Ups",
     "category": "Upper Body Only",
-    "tags": ["limited lower-body mobility", "strength", "balance", "none"],
-    "intensity": "moderate",
+    "tags": ["Limited Lower-Body Mobility", "Strength", "Balance", "None"],
+    "intensity": "Moderate",
     "instructions": [
       "Stand facing a wall, arm-length away.",
       "Place palms on the wall at shoulder height.",
@@ -70,8 +70,8 @@ EXERCISE_LIBRARY = [
     "id": "neck_stretches",
     "title": "Gentle Neck Release",
     "category": "Mobility & Stretch",
-    "tags": ["visual impairment", "neurodivergent support", "mobility", "gentle", "none", "chair"],
-    "intensity": "gentle",
+    "tags": ["Visual Impairment", "Neurodivergent Support", "Mobility", "Gentle", "None", "Chair"],
+    "intensity": "Gentle",
     "instructions": [
       "Sit or stand comfortably.",
       "Slowly tilt your right ear towards your right shoulder.",
@@ -86,8 +86,8 @@ EXERCISE_LIBRARY = [
     "id": "band_pull_apart",
     "title": "Resistance Band Pull-Aparts",
     "category": "Upper Body Only",
-    "tags": ["wheelchair user", "strength", "resistance bands"],
-    "intensity": "moderate",
+    "tags": ["Wheelchair User", "Strength", "Resistance Bands"],
+    "intensity": "Moderate",
     "instructions": [
       "Hold a resistance band with both hands in front of you at shoulder height.",
       "Keep arms straight and pull the band apart by squeezing your shoulder blades together.",
@@ -101,8 +101,8 @@ EXERCISE_LIBRARY = [
     "id": "chair_squats",
     "title": "Sit-to-Stand",
     "category": "Lower Body Only",
-    "tags": ["limited upper-body mobility", "strength", "balance", "chair"],
-    "intensity": "energetic",
+    "tags": ["Limited Upper-Body Mobility", "Strength", "Balance", "Chair"],
+    "intensity": "Energetic",
     "instructions": [
       "Sit on the edge of a sturdy chair.",
       "Lean slightly forward and stand up using your legs.",
@@ -130,7 +130,7 @@ QUOTES = [
 def inject_custom_css(mode_active):
     """
     Injects CSS. 
-    Standard Mode: Modern, Clean, 'Glassy' feel.
+    Standard Mode: Expert UI, Avocado/Slate Palette, Glassmorphism.
     Accessibility Mode: High Contrast, Large Text.
     """
     if mode_active:
@@ -143,11 +143,12 @@ def inject_custom_css(mode_active):
             html, body, [class*="css"], p, div, h1, h2, h3 { 
                 font-size: 24px !important; 
                 font-family: 'Atkinson Hyperlegible', sans-serif !important; 
-                line-height: 1.5 !important;
+                line-height: 1.6 !important;
+                color: #FFFFFF !important;
             }
-            .stApp { background-color: #000000 !important; color: #FFFFFF !important; }
+            .stApp { background-color: #000000 !important; }
             
-            /* Buttons */
+            /* High Contrast Interactive Elements */
             .stButton > button { 
                 background-color: #FFFF00 !important; 
                 color: #000000 !important; 
@@ -156,29 +157,25 @@ def inject_custom_css(mode_active):
                 font-size: 26px !important; 
                 padding: 20px !important; 
                 border-radius: 0px !important;
-                box-shadow: none !important;
+                margin-bottom: 15px !important;
             }
             .stButton > button:hover {
                 background-color: #FFFFFF !important;
-            }
-
-            /* Nav Buttons specifically */
-            div[data-testid="column"] button {
-                width: 100%;
-                margin-bottom: 10px;
+                border-color: #FFFF00 !important;
             }
             
-            /* Containers */
+            /* High Contrast Containers */
             div[data-testid="stMetric"], div[data-testid="stExpander"], div[data-testid="stContainer"] {
-                background-color: #222222 !important; 
+                background-color: #1a1a1a !important; 
                 border: 3px solid #FFFF00 !important; 
-                color: #FFFFFF !important;
+                border-radius: 0px !important;
             }
             
             h1, h2, h3, h4 { 
                 color: #FFFF00 !important; 
                 text-decoration: underline; 
                 text-transform: uppercase;
+                letter-spacing: 2px;
             }
             .stSuccess, .stInfo, .stWarning { 
                 background-color: #333333 !important; 
@@ -190,69 +187,78 @@ def inject_custom_css(mode_active):
             unsafe_allow_html=True
         )
     else:
-        # --- MODERN UX MODE ---
+        # --- EXPERT UX MODE (Avocado & Slate) ---
         st.markdown(
             """
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
             
             /* Global Font & Background */
             html, body, [class*="css"] {
-                font-family: 'Inter', sans-serif;
+                font-family: 'Poppins', sans-serif;
+                color: #1e293b; /* Slate 800 */
             }
             .stApp {
-                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                background-color: #f0fdf4; /* Very light green bg */
+                background-image: radial-gradient(#dcfce7 1px, transparent 1px);
+                background-size: 20px 20px;
             }
             
-            /* Header Styling */
+            /* Typography */
             h1 {
-                color: #111827;
-                font-weight: 800;
-                letter-spacing: -1px;
+                color: #166534; /* Green 700 */
+                font-weight: 700;
+                letter-spacing: -0.5px;
             }
             h2, h3 {
-                color: #374151;
+                color: #334155; /* Slate 700 */
                 font-weight: 600;
             }
             
-            /* Card Containers */
+            /* Glassmorphism Containers */
             div[data-testid="stContainer"], div[data-testid="stMetric"], div[data-testid="stExpander"] {
-                background-color: rgba(255, 255, 255, 0.9);
-                border-radius: 16px;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-                border: none;
-                padding: 1rem;
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 20px;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                padding: 1.5rem;
+                backdrop-filter: blur(10px);
             }
             
-            /* Buttons */
+            /* Primary Buttons */
             .stButton > button {
-                background: linear-gradient(to right, #10B981, #34D399); /* Emerald Gradient */
+                background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); /* Green Gradient */
                 color: white;
                 border: none;
                 border-radius: 12px;
-                padding: 0.5rem 1rem;
+                padding: 0.6rem 1.2rem;
                 font-weight: 600;
-                transition: all 0.2s;
-                box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
+                letter-spacing: 0.5px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2);
             }
             .stButton > button:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 6px 8px rgba(16, 185, 129, 0.4);
-            }
-            .stButton > button:active {
-                transform: translateY(0px);
+                box-shadow: 0 8px 12px rgba(22, 163, 74, 0.3);
             }
             
-            /* Secondary Buttons (Gray) - We can't target specifically easily, but we can override generally */
+            /* Premium Button Style (Gold) */
+            button[kind="secondary"] {
+                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                color: white !important;
+                border: none;
+            }
             
-            /* Navigation Bar Simulation */
+            /* Form Elements */
+            .stTextInput input, .stSelectbox, .stMultiSelect {
+                border-radius: 12px;
+                border: 1px solid #cbd5e1;
+                padding: 0.5rem;
+            }
+            
+            /* Navbar Simulation */
             div[data-testid="column"] {
                 text-align: center;
-            }
-
-            /* Input Fields */
-            .stTextInput input, .stSelectbox, .stMultiSelect {
-                border-radius: 10px;
             }
             </style>
             """,
@@ -275,20 +281,20 @@ def get_audio_html(text):
 def generate_workout_plan(user_profile):
     disability = user_profile.get('disability', [])
     equipment = user_profile.get('equipment', [])
-    goal = user_profile.get('goal', 'mobility')
+    goal = user_profile.get('goal', 'Mobility')
     
     suitable = []
     for ex in EXERCISE_LIBRARY:
         score = 0
         if any(tag in ex['tags'] for tag in disability): score += 2
         
-        required_eq = [t for t in ex['tags'] if t in ["resistance bands", "light weights", "chair"]]
+        required_eq = [t for t in ex['tags'] if t in ["Resistance Bands", "Light Weights", "Chair"]]
         has_eq = all(eq in equipment for eq in required_eq)
         
-        if has_eq or "none" in ex['tags']: score += 1
+        if has_eq or "None" in ex['tags']: score += 1
         else: score = -10
             
-        if goal in ex['tags'] or goal in ex['category'].lower(): score += 1
+        if goal in ex['tags'] or goal in ex['category']: score += 1
         
         if score > 0: suitable.append(ex)
     
@@ -311,7 +317,8 @@ def navigate_to(page):
 def render_navbar():
     """Renders a modern top navigation bar using columns and buttons."""
     st.markdown("---")
-    col1, col2, col3, col4, col5 = st.columns(5)
+    # 6 columns to accommodate the new Premium/Nutrition tab
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     
     with col1:
         if st.button("🏠 Home", use_container_width=True):
@@ -323,9 +330,12 @@ def render_navbar():
         if st.button("📈 Progress", use_container_width=True):
             navigate_to("Progress")
     with col4:
+        if st.button("🥦 Nutrition", use_container_width=True): # New Premium Hook
+            navigate_to("Nutrition")
+    with col5:
         if st.button("🔗 Links", use_container_width=True): 
             navigate_to("Resources")
-    with col5:
+    with col6:
         if st.button("⚙️ Settings", use_container_width=True):
             navigate_to("Settings")
     st.markdown("---")
@@ -340,42 +350,82 @@ def render_onboarding(is_edit=False):
         btn_label = "Update Profile"
     else:
         st.title("Welcome to FitBod 🥑")
-        st.write("Let's build a fitness journey that fits **you**.")
+        st.markdown("### Let's design your accessible fitness journey.")
         btn_label = "Start My Journey"
 
     with st.container(border=True):
         with st.form("profile_form"):
-            # Personalization
+            # 1. Basics
             st.subheader("1. The Basics")
-            name = st.text_input("What should we call you?", value=profile.get("name", ""))
+            col_basic1, col_basic2 = st.columns(2)
+            with col_basic1:
+                name = st.text_input("First Name", value=profile.get("name", ""))
+            with col_basic2:
+                age_group = st.selectbox(
+                    "Age Category", 
+                    ["Under 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"],
+                    index=2 if not profile else ["Under 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"].index(profile.get("age_group", "25-34"))
+                )
+
+            # 2. Comprehensive Access Needs
+            st.subheader("2. Access & Mobility Needs")
+            st.caption("Select all that apply. We use this to filter unsafe exercises.")
             
-            # Disability / Needs
-            st.subheader("2. Access Needs")
+            access_options = [
+                "Wheelchair User (Manual)",
+                "Wheelchair User (Power)",
+                "Limited Upper-Body Mobility",
+                "Limited Lower-Body Mobility",
+                "Limited Grip Strength",
+                "Balance Issues / Vertigo",
+                "Chronic Pain / Fatigue",
+                "Visual Impairment (Low Vision)",
+                "Visual Impairment (Blind)",
+                "Neurodivergent (Autism/ADHD)",
+                "Sensory Sensitivity (Low Noise)",
+                "Post-Injury Recovery",
+                "None / General Fitness"
+            ]
+            
             disability_default = profile.get("disability", [])
+            # Filter default to ensure they exist in new options list to avoid errors
+            safe_default = [x for x in disability_default if x in access_options]
+            
             disability = st.multiselect(
                 "I identify with / require support for:",
-                ["wheelchair user", "limited upper-body mobility", "limited lower-body mobility", "visual impairment", "neurodivergent support"],
-                default=disability_default
+                access_options,
+                default=safe_default
             )
 
+            # 3. Goals & Equipment
             col_a, col_b = st.columns(2)
             with col_a:
-                st.subheader("3. Goal")
-                goal_opts = ["strength", "mobility", "balance", "endurance", "confidence building"]
+                st.subheader("3. Fitness Goal")
+                goal_opts = ["Strength", "Mobility & Flexibility", "Balance & Stability", "Cardiovascular Health", "Weight Management", "Mental Wellbeing", "Confidence Building"]
                 try:
-                    idx = goal_opts.index(profile.get("goal", "mobility"))
+                    idx = goal_opts.index(profile.get("goal", "Mobility & Flexibility"))
                 except:
                     idx = 1
                 goal = st.selectbox("Main Focus", goal_opts, index=idx)
             
             with col_b:
-                st.subheader("4. Equipment")
-                eq_opts = ["resistance bands", "light weights", "chair"]
-                equipment = st.multiselect("Available Items", eq_opts, default=profile.get("equipment", []))
+                st.subheader("4. Available Equipment")
+                eq_opts = ["Resistance Bands", "Light Weights (Dumbbells)", "Heavy Weights", "Chair (Sturdy)", "Yoga Mat", "None (Bodyweight Only)"]
+                # Sanitize defaults
+                def_eq = profile.get("equipment", [])
+                safe_eq = [x for x in def_eq if x in eq_opts]
+                equipment = st.multiselect("Select what you have:", eq_opts, default=safe_eq)
 
-            st.subheader("5. Motivation Style")
-            style_idx = ["gentle", "direct", "energetic"].index(profile.get("style", "gentle")) if "style" in profile else 0
-            style = st.select_slider("How should we coach you?", ["gentle", "direct", "energetic"], value=["gentle", "direct", "energetic"][style_idx])
+            # 5. Lifestyle & Preferences (Premium Hook Data)
+            st.subheader("5. Lifestyle & Preferences")
+            col_l1, col_l2 = st.columns(2)
+            with col_l1:
+                style_idx = ["Gentle", "Direct", "Energetic"].index(profile.get("style", "Gentle")) if "style" in profile else 0
+                style = st.select_slider("Coaching Style", ["Gentle", "Direct", "Energetic"], value=["Gentle", "Direct", "Energetic"][style_idx])
+            with col_l2:
+                diet_opts = ["No Preference", "Vegetarian", "Vegan", "Gluten-Free", "Keto", "High Protein"]
+                diet_def = profile.get("diet", "No Preference")
+                diet = st.selectbox("Dietary Preference (for Meal Plans)", diet_opts, index=diet_opts.index(diet_def) if diet_def in diet_opts else 0)
 
             submitted = st.form_submit_button(btn_label, use_container_width=True)
             
@@ -385,20 +435,21 @@ def render_onboarding(is_edit=False):
                 else:
                     st.session_state.user_profile = {
                         "name": name,
+                        "age_group": age_group,
                         "disability": disability,
                         "goal": goal,
                         "equipment": equipment,
-                        "style": style
+                        "style": style,
+                        "diet": diet
                     }
                     st.session_state.current_page = "Dashboard"
-                    # Reset plan to force regeneration
                     if 'current_plan' in st.session_state: del st.session_state.current_plan
                     st.rerun()
 
 def render_workout_card(exercise):
     """Modern Card Design for exercises"""
     with st.container():
-        # Using columns to create a header layout within the card
+        # Header
         c1, c2 = st.columns([3, 1])
         with c1:
             st.markdown(f"### {exercise['title']}")
@@ -408,7 +459,7 @@ def render_workout_card(exercise):
         
         st.divider()
         
-        # Split instructions and safety for better readability
+        # Content
         ic1, ic2 = st.columns([2, 1])
         with ic1:
             st.markdown("#### Instructions")
@@ -420,7 +471,7 @@ def render_workout_card(exercise):
             st.info(exercise['safety_note'])
             st.markdown(f"🔥 **{exercise['calories']} kcal**")
         
-        # Audio Player (Access Mode Only or Toggle)
+        # Audio Player
         if st.session_state.accessibility_mode:
             text = f"{exercise['title']}. {'. '.join(exercise['instructions'])}."
             st.markdown(get_audio_html(text), unsafe_allow_html=True)
@@ -431,16 +482,18 @@ def render_dashboard():
     profile = st.session_state.user_profile
     greeting = get_greeting(profile.get('name', 'Friend'))
     
-    # 1. Header Section
+    # 1. Hero Section
     col_head, col_img = st.columns([3, 1])
     with col_head:
         st.title(greeting)
         quote = random.choice(QUOTES)
         st.caption(f"✨ \"{quote}\"")
+        # Display Goal Tag
+        st.markdown(f"**Current Focus:** `{profile.get('goal', 'General Fitness')}`")
     with col_img:
         st.metric("Current Streak", f"🔥 {st.session_state.streak}")
 
-    # 2. Quick Actions / Hydration
+    # 2. Quick Actions
     with st.container():
         hc1, hc2, hc3 = st.columns(3)
         with hc1:
@@ -463,7 +516,7 @@ def render_dashboard():
     
     if not plan:
         st.warning("We're adjusting parameters to find the best fit. Here is a mobility starter.")
-        plan = [ex for ex in EXERCISE_LIBRARY if "mobility" in ex['tags']][:2]
+        plan = [ex for ex in EXERCISE_LIBRARY if "Mobility" in ex['tags']][:2]
 
     # Render Cards
     for ex in plan:
@@ -516,6 +569,54 @@ def render_progress():
     
     with st.expander("Journal History"):
         st.write("No journal entries yet. Complete a workout to add one!")
+
+def render_nutrition_premium():
+    """NEW PREMIUM FEATURE PAGE"""
+    st.title("🥦 Nutrition & Meal Plans")
+    st.write("Fuel your body with adaptive meal plans suited to your lifestyle.")
+    
+    profile = st.session_state.user_profile
+    user_diet = profile.get("diet", "No Preference")
+    
+    # Teaser Content
+    st.info(f"We see you prefer a **{user_diet}** diet. We have 50+ recipes waiting for you!")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("### 🥣 Breakfast Preview")
+        st.markdown(f"**{user_diet} Power Oats**\n\n*High protein, easy prep.*")
+        st.caption("Ingredients hidden...")
+        
+    with col2:
+        st.markdown("### 🥗 Lunch Preview")
+        st.markdown(f"**{user_diet} Energy Bowl**\n\n*Great for recovery.*")
+        st.caption("Ingredients hidden...")
+        
+    st.divider()
+    
+    # THE UPSELL CARD
+    with st.container():
+        st.markdown(
+            """
+            <div style="background: linear-gradient(135deg, #16a34a 0%, #064e3b 100%); padding: 30px; border-radius: 20px; text-align: center; color: white;">
+                <h1>🔒 Unlock FitBod Premium</h1>
+                <p style="font-size: 1.2rem;">Get full access to personalized Meal Plans, 1-on-1 Coaching, and Advanced Analytics.</p>
+                <ul style="list-style: none; padding: 0; font-size: 1.1rem; margin-bottom: 25px;">
+                    <li>✅ 500+ Healthy Recipes</li>
+                    <li>✅ Direct Chat with Physiotherapists</li>
+                    <li>✅ Ad-Free Experience</li>
+                </ul>
+                <h2 style="color: #fbbf24; margin-bottom: 20px;">Only $4.99 / month</h2>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        # We use columns to center the button visually
+        b1, b2, b3 = st.columns([1, 2, 1])
+        with b2:
+            if st.button("⭐ Get Premium Access", use_container_width=True):
+                st.balloons()
+                st.success("Thank you for your interest! Payment gateway would open here.")
 
 def render_resources():
     st.title("🔗 Resources & Equipment")
@@ -575,6 +676,8 @@ else:
         render_library()
     elif page == "Progress":
         render_progress()
+    elif page == "Nutrition":
+        render_nutrition_premium()
     elif page == "Resources":
         render_resources()
     elif page == "Settings":
