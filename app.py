@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import random
 import datetime
 import base64
@@ -130,8 +131,8 @@ QUOTES = [
 def inject_custom_css(mode_active):
     """
     Injects CSS. 
-    Standard Mode: Modern Gradient Theme (Teal/Emerald/Slate).
-    Accessibility Mode: High Contrast, Large Text.
+    Standard Mode: Opal-Inspired Dark Theme (Black, Dark Grey, Neon Accents).
+    Accessibility Mode: High Contrast, Large Text (Yellow on Black).
     """
     if mode_active:
         # --- ACCESSIBILITY MODE (High Contrast) ---
@@ -187,7 +188,7 @@ def inject_custom_css(mode_active):
             unsafe_allow_html=True
         )
     else:
-        # --- MODERN UX MODE ---
+        # --- OPAL INSPIRED DARK MODE ---
         st.markdown(
             """
             <style>
@@ -196,128 +197,138 @@ def inject_custom_css(mode_active):
             /* Global Reset & Font */
             html, body, [class*="css"] {
                 font-family: 'Inter', sans-serif;
-                color: #1e293b; /* Slate 800 */
+                color: #E2E8F0; /* Off-white text */
+                background-color: #000000;
             }
             
             /* Background */
             .stApp {
-                background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); /* Teal to Sky light gradient */
+                background-color: #000000;
             }
             
             /* Headers */
             h1, h2, h3 {
                 font-family: 'Poppins', sans-serif;
-                color: #0f766e; /* Teal 700 */
+                color: #F8FAFC;
                 font-weight: 700;
             }
             
             h1 {
-                background: linear-gradient(120deg, #0d9488, #0f766e);
+                background: linear-gradient(120deg, #4ade80, #38bdf8); /* Neon Green to Blue */
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
             
-            /* Modern Cards (Glassmorphism-lite) */
+            /* Modern Dark Cards */
             div[data-testid="stContainer"], div[data-testid="stMetric"], div[data-testid="stExpander"] {
-                background: #ffffff;
-                border-radius: 16px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                background: #1C1C1E; /* Dark Grey Surface */
+                border-radius: 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+                border: 1px solid #333333;
                 padding: 1.5rem;
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
             }
             
             div[data-testid="stContainer"]:hover {
+                border: 1px solid #4ade80; /* Hover Green Border */
                 transform: translateY(-2px);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+                transition: all 0.2s ease;
             }
             
             /* Metrics */
             div[data-testid="stMetric"] label {
-                color: #64748b; /* Slate 500 */
+                color: #94A3B8; /* Muted text */
                 font-size: 0.9rem;
             }
             div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
-                color: #0f766e;
+                color: #38bdf8; /* Light Blue */
                 font-weight: 800;
             }
             
             /* Primary Buttons */
             .stButton > button {
-                background: linear-gradient(to right, #0d9488, #0f766e);
-                color: white;
+                background: linear-gradient(to right, #4ade80, #22c55e); /* Green Gradient */
+                color: #000000;
                 border: none;
                 border-radius: 12px;
                 padding: 0.6rem 1.2rem;
-                font-weight: 600;
+                font-weight: 700;
                 letter-spacing: 0.5px;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 4px 6px rgba(13, 148, 136, 0.2);
+                box-shadow: 0 0 15px rgba(74, 222, 128, 0.3); /* Glow effect */
                 width: 100%;
             }
             
             .stButton > button:hover {
-                background: linear-gradient(to right, #14b8a6, #0d9488);
-                transform: translateY(-2px);
-                box-shadow: 0 10px 15px rgba(13, 148, 136, 0.3);
-                color: white !important;
+                background: linear-gradient(to right, #22c55e, #16a34a);
+                transform: scale(1.02);
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+                color: #000000 !important;
             }
             
             .stButton > button:active {
-                transform: translateY(0);
+                transform: scale(0.98);
             }
             
-            /* Premium Button Style (Gold) */
+            /* Premium Button Style (Gold/Orange) */
             button[kind="secondary"] {
-                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-                color: white !important;
+                background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+                color: black !important;
                 border: none;
+                font-weight: bold;
             }
 
             /* Inputs */
             .stTextInput input, .stSelectbox div[data-baseweb="select"], .stMultiSelect div[data-baseweb="select"] {
-                background-color: #ffffff;
-                border: 1px solid #cbd5e1;
-                border-radius: 10px;
-                color: #334155;
+                background-color: #27272a;
+                border: 1px solid #3f3f46;
+                border-radius: 12px;
+                color: #ffffff;
             }
             
             /* Navigation Bar Simulation */
             div[data-testid="column"] button {
                 background: transparent;
-                color: #475569;
+                color: #94A3B8;
                 box-shadow: none;
                 border: 1px solid transparent;
             }
             
             div[data-testid="column"] button:hover {
-                background: #e0f2fe;
-                color: #0f766e;
+                background: #27272a;
+                color: #4ade80; /* Hover Green */
                 box-shadow: none;
                 transform: none;
-                border: 1px solid #ccfbf1;
+                border: 1px solid #4ade80;
             }
 
             /* Expander Header */
             .streamlit-expanderHeader {
                 font-family: 'Poppins', sans-serif;
-                color: #334155;
+                color: #E2E8F0;
                 font-weight: 600;
+                background-color: #1C1C1E;
             }
             
             /* Success/Info Messages */
             .stSuccess, .stInfo, .stWarning {
                 border-radius: 12px;
                 border: none;
-                color: #334155;
+                color: #ffffff;
             }
             .stSuccess {
-                background-color: #d1fae5;
-                border-left: 5px solid #10b981;
+                background-color: rgba(74, 222, 128, 0.1);
+                border: 1px solid #4ade80;
+                color: #4ade80;
             }
             .stInfo {
-                background-color: #e0f2fe;
-                border-left: 5px solid #0ea5e9;
+                background-color: rgba(56, 189, 248, 0.1);
+                border: 1px solid #38bdf8;
+                color: #38bdf8;
+            }
+            
+            /* Charts */
+            canvas {
+                filter: invert(1) hue-rotate(180deg);
             }
             </style>
             """,
@@ -359,6 +370,22 @@ def generate_workout_plan(user_profile):
     
     if len(suitable) >= 3: return random.sample(suitable, 3)
     return suitable
+
+def generate_dummy_history():
+    """Generates 30 days of dummy workout data for charts."""
+    dates = pd.date_range(end=datetime.date.today(), periods=30)
+    data = {
+        "Date": dates,
+        "Minutes": np.random.randint(15, 60, size=30),
+        "Calories": np.random.randint(100, 400, size=30),
+        "Mood": np.random.choice(["Energized", "Tired", "Happy", "Strong"], size=30)
+    }
+    # Add some zeros to simulate rest days
+    mask = np.random.choice([True, False], size=30, p=[0.2, 0.8])
+    data["Minutes"][mask] = 0
+    data["Calories"][mask] = 0
+    
+    return pd.DataFrame(data)
 
 def get_greeting(name):
     hour = datetime.datetime.now().hour
@@ -413,10 +440,10 @@ def render_onboarding(is_edit=False):
         # --- NEW FANCIER FIRST SCREEN ---
         st.markdown(
             """
-            <div style="text-align: center; padding: 40px 0; background: linear-gradient(180deg, rgba(220,252,231,0) 0%, rgba(220,252,231,0.5) 100%); border-radius: 20px; margin-bottom: 30px;">
-                <h1 style="font-size: 4rem; margin-bottom: 0; background: -webkit-linear-gradient(45deg, #166534, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">FitBod 🥑</h1>
-                <h3 style="font-weight: 300; font-style: italic; color: #374151; margin-top: 10px;">Empowering Movement. No Limits.</h3>
-                <p style="font-size: 1.2rem; color: #4b5563; max-width: 600px; margin: 20px auto;">
+            <div style="text-align: center; padding: 40px 0; background: radial-gradient(circle, rgba(74,222,128,0.1) 0%, rgba(0,0,0,0) 70%); border-radius: 20px; margin-bottom: 30px;">
+                <h1 style="font-size: 4rem; margin-bottom: 0;">FitBod 🥑</h1>
+                <h3 style="font-weight: 300; font-style: italic; color: #94A3B8; margin-top: 10px;">Empowering Movement. No Limits.</h3>
+                <p style="font-size: 1.2rem; color: #CBD5E1; max-width: 600px; margin: 20px auto;">
                     Your personalized, adaptive fitness companion. Designed for every body, every ability, and every goal.
                 </p>
             </div>
@@ -565,9 +592,9 @@ def render_dashboard():
         quote = random.choice(QUOTES)
         st.markdown(
             f"""
-            <div style="background-color: #0f766e; padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #fbbf24; margin:0; font-family: 'Poppins', sans-serif;">✨ Daily Motivation</h3>
-                <p style="font-size: 1.3em; font-style: italic; margin-top: 10px; color: #f0fdfa;">"{quote}"</p>
+            <div style="background: linear-gradient(135deg, #1C1C1E 0%, #27272a 100%); padding: 20px; border-radius: 10px; border: 1px solid #333; margin-bottom: 20px;">
+                <h3 style="color: #4ade80; margin:0; font-family: 'Poppins', sans-serif;">✨ Daily Motivation</h3>
+                <p style="font-size: 1.3em; font-style: italic; margin-top: 10px; color: #E2E8F0;">"{quote}"</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -685,21 +712,36 @@ def render_library():
 def render_progress():
     st.title("📈 Your Progress")
     
-    data = {
-        "Day": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        "Workouts": [1, 0, 1, 1, 0, 1, 0] # Mock data
-    }
-    df = pd.DataFrame(data)
+    # Generate Dummy Data
+    if 'history_data' not in st.session_state:
+        st.session_state.history_data = generate_dummy_history()
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric("Total Active Minutes", f"{st.session_state.streak * 15} mins")
-    with col2:
-        st.metric("Total Calories Burned", f"{st.session_state.streak * 120} kcal")
+    df = st.session_state.history_data
+    
+    # Summary Metrics
+    total_mins = df['Minutes'].sum() + (st.session_state.streak * 15)
+    total_cals = df['Calories'].sum() + (st.session_state.streak * 120)
+    
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.metric("Total Active Mins", f"{total_mins}")
+    with c2:
+        st.metric("Calories Burned", f"{total_cals}")
+    with c3:
+        st.metric("Workouts Logged", f"{len(df[df['Minutes'] > 0])}")
+
+    st.markdown("---")
+    
+    col_charts1, col_charts2 = st.columns(2)
+    
+    with col_charts1:
+        st.subheader("🔥 Activity Trends (Mins)")
+        st.area_chart(df.set_index("Date")["Minutes"], color="#4ade80") # Green
         
-    st.subheader("Weekly Activity")
-    st.bar_chart(df.set_index("Day"))
-    
+    with col_charts2:
+        st.subheader("⚡ Intensity (Calories)")
+        st.bar_chart(df.set_index("Date")["Calories"], color="#38bdf8") # Blue
+
     st.subheader("📝 Journal History")
     if st.session_state.journal_entries:
         for entry in reversed(st.session_state.journal_entries):
@@ -799,18 +841,18 @@ def render_sponsors():
     st.write("We are proud to be supported by these accessible fitness brands. Their support keeps the core features of FitBod free for everyone.")
     
     sponsors = [
-        {"name": "EcoHydrate", "offer": "20% OFF Smart Bottles", "desc": "Easy-grip, lightweight bottles designed for accessible hydration.", "color": "#e0f2f1"},
-        {"name": "FlexMat", "offer": "Buy 1 Get 1 Free", "desc": "Extra thick, non-slip mats perfect for chair stability and joint protection.", "color": "#f3e5f5"},
-        {"name": "ProteinPlus", "offer": "Free Sample Pack", "desc": "Plant-based nutrition shakes with easy-open caps.", "color": "#fff3e0"},
+        {"name": "EcoHydrate", "offer": "20% OFF Smart Bottles", "desc": "Easy-grip, lightweight bottles designed for accessible hydration.", "color": "#1C1C1E"},
+        {"name": "FlexMat", "offer": "Buy 1 Get 1 Free", "desc": "Extra thick, non-slip mats perfect for chair stability and joint protection.", "color": "#1C1C1E"},
+        {"name": "ProteinPlus", "offer": "Free Sample Pack", "desc": "Plant-based nutrition shakes with easy-open caps.", "color": "#1C1C1E"},
     ]
     
     for s in sponsors:
         st.markdown(
             f"""
-            <div style="background-color: {s['color']}; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 5px solid #333;">
-                <h3 style="margin:0; color: #333;">{s['name']}</h3>
-                <h4 style="color: #d81b60; margin: 5px 0;">{s['offer']}</h4>
-                <p style="color: #555;">{s['desc']}</p>
+            <div style="background-color: {s['color']}; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 5px solid #4ade80; border: 1px solid #333;">
+                <h3 style="margin:0; color: #F8FAFC;">{s['name']}</h3>
+                <h4 style="color: #4ade80; margin: 5px 0;">{s['offer']}</h4>
+                <p style="color: #94A3B8;">{s['desc']}</p>
                 <button style="background: #333; color: white; border:none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Visit Website</button>
             </div>
             """,
