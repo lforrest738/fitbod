@@ -16,104 +16,181 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- EXERCISE LIBRARY ---
+# --- EXPANDED EXERCISE LIBRARY (VARIED ROUTINES) ---
 EXERCISE_LIBRARY = [
+  # --- SEATED STRENGTH ---
   {
     "id": "seated_shoulder_press",
     "title": "Seated Shoulder Press",
     "category": "Seated Strength",
     "tags": ["Wheelchair User", "Limited Lower-Body Mobility", "Upper Body", "Strength", "Resistance Bands", "Light Weights"],
     "intensity": "Moderate",
-    "instructions": [
-      "Sit upright with your back supported.",
-      "Hold weights or resistance band handles at shoulder height, elbows bent.",
-      "Push your hands up towards the ceiling until arms are fully extended.",
-      "Slowly lower back to the starting position."
-    ],
-    "safety_note": "Keep your core engaged to protect your lower back. Stop if you feel sharp pain.",
-    "calories": 40,
-    "duration_minutes": 5
+    "instructions": ["Sit upright.", "Push hands to ceiling.", "Lower slowly."],
+    "safety_note": "Engage core.",
+    "calories": 40, "duration_minutes": 5
   },
+  {
+    "id": "seated_bicep_curls",
+    "title": "Seated Bicep Curls",
+    "category": "Seated Strength",
+    "tags": ["Wheelchair User", "Upper Body", "Strength", "Light Weights"],
+    "intensity": "Low",
+    "instructions": ["Hold weights at sides.", "Curl upwards.", "Lower with control."],
+    "safety_note": "Keep elbows tucked.",
+    "calories": 30, "duration_minutes": 5
+  },
+  {
+    "id": "seated_row",
+    "title": "Seated Band Row",
+    "category": "Seated Strength",
+    "tags": ["Wheelchair User", "Upper Body", "Strength", "Resistance Bands"],
+    "intensity": "Moderate",
+    "instructions": ["Wrap band around feet/door.", "Pull elbows back.", "Squeeze shoulder blades."],
+    "safety_note": "Don't lean back too far.",
+    "calories": 45, "duration_minutes": 5
+  },
+  
+  # --- WHEELCHAIR CARDIO ---
   {
     "id": "seated_march",
     "title": "Seated High Knees",
-    "category": "Cardio for Wheelchair Users",
-    "tags": ["Wheelchair User", "Limited Lower-Body Mobility", "Cardio", "Endurance", "None"],
+    "category": "Cardio",
+    "tags": ["Wheelchair User", "Cardio", "Endurance"],
     "intensity": "Energetic",
-    "instructions": [
-      "Sit tall in your chair.",
-      "Lift one knee as high as comfortable, then lower it.",
-      "Lift the other knee.",
-      "Repeat in a rhythmic marching motion. Pump your arms for extra intensity."
-    ],
-    "safety_note": "Ensure your chair is stable and brakes are on.",
-    "calories": 60,
-    "duration_minutes": 10
+    "instructions": ["Lift knees rhythmically.", "Pump arms."],
+    "safety_note": "Ensure stable chair.",
+    "calories": 60, "duration_minutes": 10
   },
   {
-    "id": "wall_pushup",
-    "title": "Wall Push-Ups",
-    "category": "Upper Body Only",
-    "tags": ["Limited Lower-Body Mobility", "Strength", "Balance", "None"],
+    "id": "arm_circles",
+    "title": "Rapid Arm Circles",
+    "category": "Cardio",
+    "tags": ["Wheelchair User", "Cardio", "Upper Body"],
     "intensity": "Moderate",
-    "instructions": [
-      "Stand facing a wall, arm-length away.",
-      "Place palms on the wall at shoulder height.",
-      "Bend elbows to bring your chest towards the wall.",
-      "Push back to the starting position."
-    ],
-    "safety_note": "Ensure non-slip footwear. Keep your body in a straight line.",
-    "calories": 50,
-    "duration_minutes": 5
+    "instructions": ["Extend arms out.", "Circle forward fast for 30s.", "Reverse."],
+    "safety_note": "Stop if shoulders click.",
+    "calories": 50, "duration_minutes": 5
   },
+  {
+    "id": "shadow_boxing",
+    "title": "Seated Shadow Boxing",
+    "category": "Cardio",
+    "tags": ["Wheelchair User", "Cardio", "Upper Body", "Stress Relief"],
+    "intensity": "Energetic",
+    "instructions": ["Punch forward (Jab/Cross).", "Keep tempo high.", "Breathe out on punch."],
+    "safety_note": "Don't overextend elbows.",
+    "calories": 80, "duration_minutes": 10
+  },
+
+  # --- MOBILITY & SENSORY ---
   {
     "id": "neck_stretches",
     "title": "Gentle Neck Release",
-    "category": "Mobility & Stretch",
-    "tags": ["Visual Impairment", "Neurodivergent Support", "Mobility", "Gentle", "None", "Chair"],
+    "category": "Mobility",
+    "tags": ["Visual Impairment", "Neurodivergent Support", "Mobility", "Gentle"],
     "intensity": "Gentle",
-    "instructions": [
-      "Sit or stand comfortably.",
-      "Slowly tilt your right ear towards your right shoulder.",
-      "Hold for 10 seconds. Breathe deeply.",
-      "Return to center and repeat on the left side."
-    ],
-    "safety_note": "Move slowly. Do not force your head down.",
-    "calories": 10,
-    "duration_minutes": 3
+    "instructions": ["Tilt ear to shoulder.", "Hold 10s.", "Switch."],
+    "safety_note": "Move slowly.",
+    "calories": 10, "duration_minutes": 3
   },
   {
-    "id": "band_pull_apart",
-    "title": "Resistance Band Pull-Aparts",
-    "category": "Upper Body Only",
-    "tags": ["Wheelchair User", "Strength", "Resistance Bands"],
+    "id": "wrist_rolls",
+    "title": "Wrist & Ankle Rolls",
+    "category": "Mobility",
+    "tags": ["Mobility", "Gentle", "Desk Work"],
+    "intensity": "Gentle",
+    "instructions": ["Rotate wrists clockwise.", "Rotate anti-clockwise.", "Repeat with ankles if able."],
+    "safety_note": "Gentle movement only.",
+    "calories": 15, "duration_minutes": 3
+  },
+  {
+    "id": "cat_cow_seated",
+    "title": "Seated Cat-Cow",
+    "category": "Mobility",
+    "tags": ["Mobility", "Back Pain", "Wheelchair User"],
+    "intensity": "Low",
+    "instructions": ["Hands on knees.", "Arch back look up (Cow).", "Round spine look down (Cat)."],
+    "safety_note": "Listen to your spine.",
+    "calories": 20, "duration_minutes": 5
+  },
+
+  # --- STANDING / LOWER BODY SUPPORTED ---
+  {
+    "id": "wall_pushup",
+    "title": "Wall Push-Ups",
+    "category": "Strength",
+    "tags": ["Limited Lower-Body Mobility", "Strength", "Balance"],
     "intensity": "Moderate",
-    "instructions": [
-      "Hold a resistance band with both hands in front of you at shoulder height.",
-      "Keep arms straight and pull the band apart by squeezing your shoulder blades together.",
-      "Return to center with control."
-    ],
-    "safety_note": "Don't shrug your shoulders. Keep neck relaxed.",
-    "calories": 45,
-    "duration_minutes": 5
+    "instructions": ["Face wall.", "Push chest to wall.", "Push back."],
+    "safety_note": "Non-slip shoes needed.",
+    "calories": 50, "duration_minutes": 5
   },
   {
     "id": "chair_squats",
     "title": "Sit-to-Stand",
-    "category": "Lower Body Only",
+    "category": "Strength",
     "tags": ["Limited Upper-Body Mobility", "Strength", "Balance", "Chair"],
     "intensity": "Energetic",
-    "instructions": [
-      "Sit on the edge of a sturdy chair.",
-      "Lean slightly forward and stand up using your legs.",
-      "Slowly lower yourself back down to the seat.",
-      "Repeat."
-    ],
-    "safety_note": "Ensure the chair will not slide backwards.",
-    "calories": 70,
-    "duration_minutes": 8
+    "instructions": ["Sit on edge of chair.", "Stand up.", "Sit down slowly."],
+    "safety_note": "Chair against wall.",
+    "calories": 70, "duration_minutes": 8
+  },
+  {
+    "id": "kitchen_counter_calf",
+    "title": "Supported Calf Raises",
+    "category": "Strength",
+    "tags": ["Balance", "Strength", "Limited Lower-Body Mobility"],
+    "intensity": "Low",
+    "instructions": ["Hold counter.", "Lift heels.", "Lower."],
+    "safety_note": "Hold tight for balance.",
+    "calories": 30, "duration_minutes": 5
   }
 ]
+
+# --- RECIPE DATA ---
+RECIPES = [
+    {
+        "id": "r1", 
+        "title": "Power Protein Oats", 
+        "price": 0.99,
+        "image": "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=400",
+        "desc": "High energy breakfast.",
+        "ingredients": ["Oats", "Protein Powder", "Chia Seeds", "Almond Milk", "Blueberries"]
+    },
+    {
+        "id": "r2", 
+        "title": "Green Recovery Smoothie", 
+        "price": 0.99,
+        "image": "https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=400",
+        "desc": "Perfect post-workout.",
+        "ingredients": ["Spinach", "Banana", "Protein Powder", "Coconut Water"]
+    },
+    {
+        "id": "r3", 
+        "title": "Quinoa Energy Bowl", 
+        "price": 0.99,
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+        "desc": "Lunch for stamina.",
+        "ingredients": ["Quinoa", "Chickpeas", "Avocado", "Lemon", "Olive Oil"]
+    },
+    {
+        "id": "r4", 
+        "title": "Lentil Stew", 
+        "price": 0.99,
+        "image": "https://images.unsplash.com/photo-1547592166-23acbe346499?w=400",
+        "desc": "Warm comfort food.",
+        "ingredients": ["Lentils", "Carrots", "Vegetable Stock", "Turmeric"]
+    }
+]
+
+# --- SPONSOR MAPPING ---
+# If user buys a recipe with these ingredients, show a voucher
+SPONSOR_DEALS = {
+    "Protein Powder": {"sponsor": "ProteinPlus", "code": "PRO20 (20% Off)", "color": "#fff3e0"},
+    "Oats": {"sponsor": "WholeGrainz", "code": "OAT5 (5% Off)", "color": "#f1f8e9"},
+    "Almond Milk": {"sponsor": "NutriMilk", "code": "MILK10 (10% Off)", "color": "#e0f7fa"},
+    "Resistance Bands": {"sponsor": "FlexMat", "code": "FLEX15 (15% Off)", "color": "#f3e5f5"} # Cross-sell example
+}
 
 QUOTES = [
     "Small steps every day lead to big changes.",
@@ -267,7 +344,7 @@ def inject_custom_css(mode_active):
                 transform: translateY(0);
             }
             
-            /* Premium Button Style (Gold) */
+            /* Premium/Purchase Button Style (Gold) */
             button[kind="secondary"] {
                 background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
                 color: white !important;
@@ -338,26 +415,42 @@ def get_audio_html(text):
         return "<small>Audio unavailable in offline mode.</small>"
 
 def generate_workout_plan(user_profile):
+    """
+    Robust generator that uses the expanded library.
+    It tries to find unique routines suitable for the user's needs.
+    """
     disability = user_profile.get('disability', [])
     equipment = user_profile.get('equipment', [])
     goal = user_profile.get('goal', 'Mobility')
     
     suitable = []
+    
+    # 1. Scoring System
     for ex in EXERCISE_LIBRARY:
         score = 0
-        if any(tag in ex['tags'] for tag in disability): score += 2
+        # Positive filtering: Does this exercise match their needs?
+        if any(tag in ex['tags'] for tag in disability): score += 3
+        if "Wheelchair User" in disability and "Wheelchair User" in ex['tags']: score += 5
         
+        # Equipment filtering: Must have required equipment
         required_eq = [t for t in ex['tags'] if t in ["Resistance Bands", "Light Weights", "Chair"]]
         has_eq = all(eq in equipment for eq in required_eq)
         
-        if has_eq or "None" in ex['tags']: score += 1
-        else: score = -10
+        if has_eq or "None" in ex['tags']: 
+            score += 1
+        else: 
+            score = -999 # Impossible to do
             
-        if goal in ex['tags'] or goal in ex['category']: score += 1
+        # Goal Boost
+        if goal in ex['tags'] or goal in ex['category']: score += 2
         
         if score > 0: suitable.append(ex)
     
-    if len(suitable) >= 3: return random.sample(suitable, 3)
+    # 2. Random Selection ensuring variety
+    # If we have enough, pick 3 random ones
+    if len(suitable) >= 3: 
+        return random.sample(suitable, 3)
+    # If limited options, return what we have
     return suitable
 
 def get_greeting(name):
@@ -376,27 +469,20 @@ def navigate_to(page):
 def render_navbar():
     """Renders a modern top navigation bar using columns and buttons."""
     st.markdown("---")
-    # 6 columns to accommodate the new Premium/Nutrition tab
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     
     with col1:
-        if st.button("🏠 Home", use_container_width=True):
-            navigate_to("Dashboard")
+        if st.button("🏠 Home", use_container_width=True): navigate_to("Dashboard")
     with col2:
-        if st.button("💪 Library", use_container_width=True):
-            navigate_to("Library")
+        if st.button("💪 Library", use_container_width=True): navigate_to("Library")
     with col3:
-        if st.button("📈 Progress", use_container_width=True):
-            navigate_to("Progress")
+        if st.button("📈 Progress", use_container_width=True): navigate_to("Progress")
     with col4:
-        if st.button("🥦 Nutrition", use_container_width=True): # New Premium Hook
-            navigate_to("Nutrition")
+        if st.button("🥦 Nutrition", use_container_width=True): navigate_to("Nutrition")
     with col5:
-        if st.button("🤝 Sponsors", use_container_width=True): 
-            navigate_to("Sponsors")
+        if st.button("🤝 Sponsors", use_container_width=True): navigate_to("Sponsors")
     with col6:
-        if st.button("⚙️ Settings", use_container_width=True):
-            navigate_to("Settings")
+        if st.button("⚙️ Settings", use_container_width=True): navigate_to("Settings")
     st.markdown("---")
 
 # --- 5. COMPONENTS ---
@@ -407,10 +493,8 @@ def render_onboarding(is_edit=False):
     if is_edit:
         st.header("✏️ Edit Your Profile")
         btn_label = "Update Profile"
-        # Standard container for Edit Mode
         container = st.container(border=True)
     else:
-        # --- NEW FANCIER FIRST SCREEN ---
         st.markdown(
             """
             <div style="text-align: center; padding: 40px 0; background: linear-gradient(180deg, rgba(220,252,231,0) 0%, rgba(220,252,231,0.5) 100%); border-radius: 20px; margin-bottom: 30px;">
@@ -429,7 +513,6 @@ def render_onboarding(is_edit=False):
 
     with container:
         with st.form("profile_form"):
-            # 1. Basics
             st.subheader("1. The Basics")
             col_basic1, col_basic2 = st.columns(2)
             with col_basic1:
@@ -441,56 +524,35 @@ def render_onboarding(is_edit=False):
                     index=2 if not profile else ["Under 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"].index(profile.get("age_group", "25-34"))
                 )
 
-            # 2. Comprehensive Access Needs
             st.subheader("2. Access & Mobility Needs")
-            st.caption("Select all that apply. We use this to filter unsafe exercises.")
-            
             access_options = [
-                "Wheelchair User (Manual)",
-                "Wheelchair User (Power)",
-                "Limited Upper-Body Mobility",
-                "Limited Lower-Body Mobility",
-                "Limited Grip Strength",
-                "Balance Issues / Vertigo",
-                "Chronic Pain / Fatigue",
-                "Visual Impairment (Low Vision)",
-                "Visual Impairment (Blind)",
-                "Neurodivergent (Autism/ADHD)",
-                "Sensory Sensitivity (Low Noise)",
-                "Post-Injury Recovery",
+                "Wheelchair User (Manual)", "Wheelchair User (Power)",
+                "Limited Upper-Body Mobility", "Limited Lower-Body Mobility",
+                "Limited Grip Strength", "Balance Issues / Vertigo",
+                "Chronic Pain / Fatigue", "Visual Impairment (Low Vision)",
+                "Visual Impairment (Blind)", "Neurodivergent (Autism/ADHD)",
+                "Sensory Sensitivity (Low Noise)", "Post-Injury Recovery",
                 "None / General Fitness"
             ]
-            
             disability_default = profile.get("disability", [])
-            # Filter default to ensure they exist in new options list to avoid errors
             safe_default = [x for x in disability_default if x in access_options]
-            
-            disability = st.multiselect(
-                "I identify with / require support for:",
-                access_options,
-                default=safe_default
-            )
+            disability = st.multiselect("Select all that apply:", access_options, default=safe_default)
 
-            # 3. Goals & Equipment
             col_a, col_b = st.columns(2)
             with col_a:
                 st.subheader("3. Fitness Goal")
                 goal_opts = ["Strength", "Mobility & Flexibility", "Balance & Stability", "Cardiovascular Health", "Weight Management", "Mental Wellbeing", "Confidence Building"]
-                try:
-                    idx = goal_opts.index(profile.get("goal", "Mobility & Flexibility"))
-                except:
-                    idx = 1
+                try: idx = goal_opts.index(profile.get("goal", "Mobility & Flexibility"))
+                except: idx = 1
                 goal = st.selectbox("Main Focus", goal_opts, index=idx)
             
             with col_b:
                 st.subheader("4. Available Equipment")
                 eq_opts = ["Resistance Bands", "Light Weights (Dumbbells)", "Heavy Weights", "Chair (Sturdy)", "Yoga Mat", "None (Bodyweight Only)"]
-                # Sanitize defaults
                 def_eq = profile.get("equipment", [])
                 safe_eq = [x for x in def_eq if x in eq_opts]
                 equipment = st.multiselect("Select what you have:", eq_opts, default=safe_eq)
 
-            # 5. Lifestyle & Preferences (Premium Hook Data)
             st.subheader("5. Lifestyle & Preferences")
             col_l1, col_l2 = st.columns(2)
             with col_l1:
@@ -499,7 +561,7 @@ def render_onboarding(is_edit=False):
             with col_l2:
                 diet_opts = ["No Preference", "Vegetarian", "Vegan", "Gluten-Free", "Keto", "High Protein"]
                 diet_def = profile.get("diet", "No Preference")
-                diet = st.selectbox("Dietary Preference (for Meal Plans)", diet_opts, index=diet_opts.index(diet_def) if diet_def in diet_opts else 0)
+                diet = st.selectbox("Dietary Preference", diet_opts, index=diet_opts.index(diet_def) if diet_def in diet_opts else 0)
 
             submitted = st.form_submit_button(btn_label, use_container_width=True)
             
@@ -508,44 +570,31 @@ def render_onboarding(is_edit=False):
                     st.error("Please enter your name!")
                 else:
                     st.session_state.user_profile = {
-                        "name": name,
-                        "age_group": age_group,
-                        "disability": disability,
-                        "goal": goal,
-                        "equipment": equipment,
-                        "style": style,
-                        "diet": diet
+                        "name": name, "age_group": age_group, "disability": disability,
+                        "goal": goal, "equipment": equipment, "style": style, "diet": diet
                     }
                     st.session_state.current_page = "Dashboard"
                     if 'current_plan' in st.session_state: del st.session_state.current_plan
                     st.rerun()
 
 def render_workout_card(exercise):
-    """Modern Card Design for exercises"""
     with st.container():
-        # Header
         c1, c2 = st.columns([3, 1])
         with c1:
             st.markdown(f"### {exercise['title']}")
             st.markdown(f"**{exercise['category']}** • *{exercise['intensity'].title()} Intensity*")
         with c2:
             st.markdown(f"## ⏱️ {exercise['duration_minutes']}m")
-        
         st.divider()
-        
-        # Content
         ic1, ic2 = st.columns([2, 1])
         with ic1:
             st.markdown("#### Instructions")
             for i, step in enumerate(exercise['instructions']):
                 st.write(f"**{i+1}.** {step}")
-        
         with ic2:
             st.markdown("#### Safety First 🛡️")
             st.info(exercise['safety_note'])
             st.markdown(f"🔥 **{exercise['calories']} kcal**")
-        
-        # Audio Player
         if st.session_state.accessibility_mode:
             text = f"{exercise['title']}. {'. '.join(exercise['instructions'])}."
             st.markdown(get_audio_html(text), unsafe_allow_html=True)
@@ -556,12 +605,9 @@ def render_dashboard():
     profile = st.session_state.user_profile
     greeting = get_greeting(profile.get('name', 'Friend'))
     
-    # 1. Hero Section & Motivation
     col_head, col_img = st.columns([3, 1])
     with col_head:
         st.title(greeting)
-        
-        # PROMINENT QUOTE DISPLAY
         quote = random.choice(QUOTES)
         st.markdown(
             f"""
@@ -569,15 +615,12 @@ def render_dashboard():
                 <h3 style="color: #fbbf24; margin:0; font-family: 'Poppins', sans-serif;">✨ Daily Motivation</h3>
                 <p style="font-size: 1.3em; font-style: italic; margin-top: 10px; color: #f0fdfa;">"{quote}"</p>
             </div>
-            """,
-            unsafe_allow_html=True
+            """, unsafe_allow_html=True
         )
-        # Display Goal Tag
         st.markdown(f"**Current Focus:** `{profile.get('goal', 'General Fitness')}`")
     with col_img:
         st.metric("Current Streak", f"🔥 {st.session_state.streak}")
 
-    # 2. Quick Actions
     with st.container():
         hc1, hc2, hc3 = st.columns(3)
         with hc1:
@@ -589,117 +632,79 @@ def render_dashboard():
         with hc3:
             if st.button("🔄 New Routine", use_container_width=True):
                 st.session_state.current_plan = generate_workout_plan(profile)
-                st.session_state.workout_completed = False # Reset state
+                st.session_state.workout_completed = False
                 st.rerun()
 
     st.markdown("---")
 
-    # 3. Post-Workout Logic OR Workout View
     if st.session_state.workout_completed:
-        # POST WORKOUT VIEW
         st.balloons()
         st.markdown("## 🎉 Amazing Job, " + profile.get('name', 'Friend') + "!")
         st.success("You've completed your daily routine. Take a moment to rest and reflect.")
-        
         c1, c2 = st.columns(2)
         with c1:
             st.info("💡 **Tip:** Tracking how you feel helps us adjust future intensity.")
-            feeling = st.text_area("How are you feeling?", key="journal_input", placeholder="I feel energized / tired / proud...")
-            
-            # Action Buttons Row
+            feeling = st.text_area("How are you feeling?", key="journal_input", placeholder="I feel energized...")
             col_save, col_view = st.columns([1, 1])
             with col_save:
                 if st.button("💾 Save to Journal"):
                     if feeling:
-                        entry = {
-                            "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-                            "note": feeling
-                        }
+                        entry = {"date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), "note": feeling}
                         st.session_state.journal_entries.append(entry)
-                        st.session_state.last_saved_feeling = True # Flag to show success
+                        st.session_state.last_saved_feeling = True
                         st.toast("Journal Entry Saved!")
-                    else:
-                        st.error("Please write something to save!")
-            
-            # Show success and offer navigation if saved
+                    else: st.error("Please write something to save!")
             if st.session_state.get('last_saved_feeling', False):
-                with col_view:
-                    st.success("Saved!")
+                with col_view: st.success("Saved!")
                 if st.button("📖 View in Progress Tab"):
-                    st.session_state.last_saved_feeling = False # Reset
+                    st.session_state.last_saved_feeling = False
                     navigate_to("Progress")
-        
         with c2:
             st.markdown("### What's Next?")
-            if st.button("📈 View Progress Stats", use_container_width=True):
-                navigate_to("Progress")
-            
+            if st.button("📈 View Progress Stats", use_container_width=True): navigate_to("Progress")
             st.write("")
             if st.button("🔄 Generate Another Workout", use_container_width=True):
                 st.session_state.workout_completed = False
                 st.session_state.current_plan = generate_workout_plan(profile)
                 st.rerun()
-
     else:
-        # WORKOUT CARD VIEW
         st.markdown("### Today's Personalized Plan")
-        
         if 'current_plan' not in st.session_state:
             st.session_state.current_plan = generate_workout_plan(profile)
-            
         plan = st.session_state.current_plan
-        
         if not plan:
             st.warning("We're adjusting parameters to find the best fit. Here is a mobility starter.")
             plan = [ex for ex in EXERCISE_LIBRARY if "Mobility" in ex['tags']][:2]
-
-        # Render Cards
         for ex in plan:
             render_workout_card(ex)
-            st.write("") # spacer
-
+            st.write("")
         if st.button("✅ Complete Workout", type="primary", use_container_width=True):
             st.session_state.streak += 1
-            st.session_state.workout_completed = True # TRIGGER POST WORKOUT VIEW
+            st.session_state.workout_completed = True
             st.rerun()
 
 def render_library():
     st.title("📚 Exercise Library")
     st.write("Browse all accessible exercises.")
-    
     col_search, col_filter = st.columns([2, 1])
     with col_search:
         search_term = st.text_input("Search exercises...", placeholder="e.g. 'shoulder'")
     with col_filter:
         cat_filter = st.selectbox("Category", ["All"] + list(set(e['category'] for e in EXERCISE_LIBRARY)))
-    
     filtered = EXERCISE_LIBRARY
-    if cat_filter != "All":
-        filtered = [e for e in filtered if e['category'] == cat_filter]
-    if search_term:
-        filtered = [e for e in filtered if search_term.lower() in e['title'].lower()]
-        
-    for ex in filtered:
-        render_workout_card(ex)
+    if cat_filter != "All": filtered = [e for e in filtered if e['category'] == cat_filter]
+    if search_term: filtered = [e for e in filtered if search_term.lower() in e['title'].lower()]
+    for ex in filtered: render_workout_card(ex)
 
 def render_progress():
     st.title("📈 Your Progress")
-    
-    data = {
-        "Day": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        "Workouts": [1, 0, 1, 1, 0, 1, 0] # Mock data
-    }
+    data = {"Day": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], "Workouts": [1, 0, 1, 1, 0, 1, 0]}
     df = pd.DataFrame(data)
-    
     col1, col2 = st.columns(2)
-    with col1:
-        st.metric("Total Active Minutes", f"{st.session_state.streak * 15} mins")
-    with col2:
-        st.metric("Total Calories Burned", f"{st.session_state.streak * 120} kcal")
-        
+    with col1: st.metric("Total Active Minutes", f"{st.session_state.streak * 15} mins")
+    with col2: st.metric("Total Calories Burned", f"{st.session_state.streak * 120} kcal")
     st.subheader("Weekly Activity")
     st.bar_chart(df.set_index("Day"))
-    
     st.subheader("📝 Journal History")
     if st.session_state.journal_entries:
         for entry in reversed(st.session_state.journal_entries):
@@ -709,99 +714,77 @@ def render_progress():
     else:
         st.info("No journal entries yet. Complete a workout to add one!")
 
-def render_nutrition_premium():
-    """NEW PREMIUM FEATURE PAGE"""
-    st.title("🥦 Nutrition & Meal Plans")
-    st.write("Fuel your body with adaptive meal plans suited to your lifestyle.")
+def render_nutrition_marketplace():
+    """UPDATED: Recipe Marketplace Logic"""
+    st.title("🥦 Nutrition Marketplace")
+    st.write("Unlock healthy, adaptive recipes for just **£0.99**. Ingredients are automatically added to your shopping list!")
     
-    profile = st.session_state.user_profile
-    user_diet = profile.get("diet", "No Preference")
-    
-    # CHECK IF UNLOCKED
-    if st.session_state.premium_unlocked:
-        # UNLOCKED CONTENT
-        st.success(f"🔓 Premium Unlocked! Viewing {user_diet} Plans.")
+    # 1. RECIPE GRID
+    for recipe in RECIPES:
+        is_owned = recipe['id'] in st.session_state.purchased_recipes
         
-        tab1, tab2, tab3 = st.tabs(["Daily Meals", "Shopping List", "Chat with Coach"])
-        
-        with tab1:
-            c1, c2, c3 = st.columns(3)
-            with c1:
-                st.markdown("### 🥣 Breakfast")
-                st.image("https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=400", use_container_width=True)
-                st.info(f"**{user_diet} Power Oats**\n\n*Oats, Chia Seeds, Berries, Protein Powder*")
-            with c2:
-                st.markdown("### 🥗 Lunch")
-                st.image("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400", use_container_width=True)
-                st.info(f"**{user_diet} Energy Bowl**\n\n*Quinoa, Avocado, Chickpeas, Tahini*")
-            with c3:
-                st.markdown("### 🍲 Dinner")
-                st.image("https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400", use_container_width=True)
-                st.info(f"**{user_diet} Recovery Stew**\n\n*Lentils, Sweet Potato, Spinach, Spices*")
-                
-        with tab2:
-            st.checkbox("Oats (500g)")
-            st.checkbox("Almond Milk")
-            st.checkbox("Spinach")
-            st.checkbox("Chickpeas (2 cans)")
-            
-        with tab3:
-            st.chat_message("assistant").write("Hello! I'm your FitBod Nutrition Coach. How can I help you tweak your diet today?")
-            st.chat_message("user").write("I need more iron in my diet.")
-            st.chat_message("assistant").write("Great! Let's add more lentils and spinach to your dinner plan.")
-
-    else:
-        # LOCKED CONTENT (TEASER)
-        st.info(f"We see you prefer a **{user_diet}** diet. We have 50+ recipes waiting for you!")
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown("### 🥣 Breakfast Preview")
-            st.markdown(f"**{user_diet} Power Oats**\n\n*High protein, easy prep.*")
-            st.caption("Ingredients hidden...")
-            
-        with col2:
-            st.markdown("### 🥗 Lunch Preview")
-            st.markdown(f"**{user_diet} Energy Bowl**\n\n*Great for recovery.*")
-            st.caption("Ingredients hidden...")
-            
-        st.divider()
-        
-        # THE UPSELL CARD
         with st.container():
-            st.markdown(
-                """
-                <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 30px; border-radius: 20px; text-align: center; color: white;">
-                    <h1 style="color: white !important;">🔒 Unlock FitBod Premium</h1>
-                    <p style="font-size: 1.2rem;">Get full access to personalized Meal Plans, 1-on-1 Coaching, and Advanced Analytics.</p>
-                    <ul style="list-style: none; padding: 0; font-size: 1.1rem; margin-bottom: 25px;">
-                        <li>✅ 500+ Healthy Recipes</li>
-                        <li>✅ Direct Chat with Physiotherapists</li>
-                        <li>✅ Ad-Free Experience</li>
-                    </ul>
-                    <h2 style="color: #fbbf24; margin-bottom: 20px;">Only $4.99 / month</h2>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-            # We use columns to center the button visually
-            b1, b2, b3 = st.columns([1, 2, 1])
-            with b2:
-                if st.button("⭐ Get Premium Access", use_container_width=True):
-                    # SIMULATE PAYMENT
-                    with st.spinner("Processing Payment..."):
-                        time.sleep(1.5)
-                        st.session_state.premium_unlocked = True
+            c1, c2 = st.columns([1, 3])
+            with c1:
+                st.image(recipe['image'], use_container_width=True)
+            with c2:
+                st.subheader(recipe['title'])
+                st.write(recipe['desc'])
+                
+                if is_owned:
+                    st.success("✅ Purchased")
+                    with st.expander("View Recipe & Ingredients"):
+                        st.write("**Ingredients:**")
+                        for ing in recipe['ingredients']:
+                            st.write(f"- {ing}")
+                else:
+                    if st.button(f"🛒 Buy Recipe (£{recipe['price']})", key=f"buy_{recipe['id']}"):
+                        # SIMULATE PURCHASE
+                        st.session_state.purchased_recipes.add(recipe['id'])
+                        # Add ingredients to list (deduplicated)
+                        for ing in recipe['ingredients']:
+                            if ing not in st.session_state.shopping_list:
+                                st.session_state.shopping_list.append(ing)
+                        st.toast(f"Bought {recipe['title']}!")
                         st.rerun()
+
+    st.markdown("---")
+    
+    # 2. SMART SHOPPING LIST
+    st.header("📝 Smart Shopping List")
+    
+    if not st.session_state.shopping_list:
+        st.info("Your list is empty. Buy a recipe above to populate it!")
+    else:
+        st.write("Tick off items as you shop. Look out for Sponsor Deals! 🎁")
+        
+        for item in st.session_state.shopping_list:
+            col_check, col_deal = st.columns([2, 3])
+            
+            with col_check:
+                st.checkbox(item, key=f"shop_{item}")
+                
+            with col_deal:
+                # SPONSOR LOGIC
+                if item in SPONSOR_DEALS:
+                    deal = SPONSOR_DEALS[item]
+                    st.markdown(
+                        f"""
+                        <div style="background-color: {deal['color']}; padding: 5px 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.9em;">
+                            <strong>🎁 {deal['sponsor']} Deal:</strong> Use code <code>{deal['code']}</code>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
 
 def render_sponsors():
     st.title("🤝 Our Sponsors & Partners")
-    st.write("We are proud to be supported by these accessible fitness brands. Their support keeps the core features of FitBod free for everyone.")
+    st.write("We are proud to be supported by these accessible fitness brands.")
     
     sponsors = [
-        {"name": "EcoHydrate", "offer": "20% OFF Smart Bottles", "desc": "Easy-grip, lightweight bottles designed for accessible hydration.", "color": "#e0f2f1"},
-        {"name": "FlexMat", "offer": "Buy 1 Get 1 Free", "desc": "Extra thick, non-slip mats perfect for chair stability and joint protection.", "color": "#f3e5f5"},
-        {"name": "ProteinPlus", "offer": "Free Sample Pack", "desc": "Plant-based nutrition shakes with easy-open caps.", "color": "#fff3e0"},
+        {"name": "ProteinPlus", "offer": "20% OFF Shakes", "desc": "Plant-based nutrition with easy-open caps.", "color": "#fff3e0"},
+        {"name": "WholeGrainz", "offer": "5% OFF Oats", "desc": "Organic oats for sustained energy.", "color": "#f1f8e9"},
+        {"name": "FlexMat", "offer": "Buy 1 Get 1 Free", "desc": "Extra thick mats for chair stability.", "color": "#f3e5f5"},
     ]
     
     for s in sponsors:
@@ -819,54 +802,40 @@ def render_sponsors():
 
 def render_settings():
     st.title("⚙️ Settings")
-    
     st.subheader("Appearance")
     is_access = st.toggle("Accessibility Mode (High Contrast)", value=st.session_state.accessibility_mode)
     if is_access != st.session_state.accessibility_mode:
         st.session_state.accessibility_mode = is_access
         st.rerun()
-        
     st.markdown("---")
-    
-    # Profile Edit
     render_onboarding(is_edit=True)
 
 # --- 7. MAIN EXECUTION FLOW ---
 
-# Initialize Session State
 if 'user_profile' not in st.session_state: st.session_state.user_profile = None
 if 'current_page' not in st.session_state: st.session_state.current_page = "Dashboard"
 if 'streak' not in st.session_state: st.session_state.streak = 0
 if 'hydration' not in st.session_state: st.session_state.hydration = 0
 if 'accessibility_mode' not in st.session_state: st.session_state.accessibility_mode = False
-if 'premium_unlocked' not in st.session_state: st.session_state.premium_unlocked = False
 if 'workout_completed' not in st.session_state: st.session_state.workout_completed = False
 if 'journal_entries' not in st.session_state: st.session_state.journal_entries = []
 if 'last_saved_feeling' not in st.session_state: st.session_state.last_saved_feeling = False
 
-# Apply Styles
+# NEW STATES FOR RECIPES
+if 'purchased_recipes' not in st.session_state: st.session_state.purchased_recipes = set()
+if 'shopping_list' not in st.session_state: st.session_state.shopping_list = []
+
 inject_custom_css(st.session_state.accessibility_mode)
 
-# Routing Logic
 if not st.session_state.user_profile:
-    # Force Onboarding if no profile
     render_onboarding()
 else:
-    # Show Navigation Bar
     render_navbar()
-    
-    # Page Router
     page = st.session_state.current_page
     
-    if page == "Dashboard":
-        render_dashboard()
-    elif page == "Library":
-        render_library()
-    elif page == "Progress":
-        render_progress()
-    elif page == "Nutrition":
-        render_nutrition_premium()
-    elif page == "Sponsors":
-        render_sponsors()
-    elif page == "Settings":
-        render_settings()
+    if page == "Dashboard": render_dashboard()
+    elif page == "Library": render_library()
+    elif page == "Progress": render_progress()
+    elif page == "Nutrition": render_nutrition_marketplace() # Updated function
+    elif page == "Sponsors": render_sponsors()
+    elif page == "Settings": render_settings()
