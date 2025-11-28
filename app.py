@@ -333,8 +333,8 @@ def render_navbar():
         if st.button("🥦 Nutrition", use_container_width=True): # New Premium Hook
             navigate_to("Nutrition")
     with col5:
-        if st.button("🔗 Links", use_container_width=True): 
-            navigate_to("Resources")
+        if st.button("🤝 Sponsors", use_container_width=True): 
+            navigate_to("Sponsors")
     with col6:
         if st.button("⚙️ Settings", use_container_width=True):
             navigate_to("Settings")
@@ -482,12 +482,22 @@ def render_dashboard():
     profile = st.session_state.user_profile
     greeting = get_greeting(profile.get('name', 'Friend'))
     
-    # 1. Hero Section
+    # 1. Hero Section & Motivation
     col_head, col_img = st.columns([3, 1])
     with col_head:
         st.title(greeting)
+        
+        # PROMINENT QUOTE DISPLAY
         quote = random.choice(QUOTES)
-        st.caption(f"✨ \"{quote}\"")
+        st.markdown(
+            f"""
+            <div style="background-color: #166534; padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px;">
+                <h3 style="color: #fbbf24; margin:0;">✨ Daily Motivation</h3>
+                <p style="font-size: 1.3em; font-style: italic; margin-top: 10px;">"{quote}"</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         # Display Goal Tag
         st.markdown(f"**Current Focus:** `{profile.get('goal', 'General Fitness')}`")
     with col_img:
@@ -505,30 +515,58 @@ def render_dashboard():
         with hc3:
             if st.button("🔄 New Routine", use_container_width=True):
                 st.session_state.current_plan = generate_workout_plan(profile)
+                st.session_state.workout_completed = False # Reset state
                 st.rerun()
 
-    st.markdown("### Today's Personalized Plan")
-    
-    if 'current_plan' not in st.session_state:
-        st.session_state.current_plan = generate_workout_plan(profile)
-        
-    plan = st.session_state.current_plan
-    
-    if not plan:
-        st.warning("We're adjusting parameters to find the best fit. Here is a mobility starter.")
-        plan = [ex for ex in EXERCISE_LIBRARY if "Mobility" in ex['tags']][:2]
+    st.markdown("---")
 
-    # Render Cards
-    for ex in plan:
-        render_workout_card(ex)
-        st.write("") # spacer
-
-    if st.button("✅ Complete Workout", type="primary", use_container_width=True):
-        st.session_state.streak += 1
+    # 3. Post-Workout Logic OR Workout View
+    if st.session_state.workout_completed:
+        # POST WORKOUT VIEW
         st.balloons()
-        st.success("Workout Complete! Streak updated.")
-        time.sleep(2)
-        st.rerun()
+        st.markdown("## 🎉 Amazing Job, " + profile.get('name', 'Friend') + "!")
+        st.success("You've completed your daily routine. Take a moment to rest and reflect.")
+        
+        c1, c2 = st.columns(2)
+        with c1:
+            st.info("💡 **Tip:** Tracking how you feel helps us adjust future intensity.")
+            feeling = st.text_area("How are you feeling?", placeholder="I feel energized / tired / proud...")
+            if st.button("💾 Save to Journal"):
+                st.toast("Journal Entry Saved!")
+        
+        with c2:
+            st.markdown("### What's Next?")
+            if st.button("📈 View Progress Stats", use_container_width=True):
+                navigate_to("Progress")
+            
+            st.write("")
+            if st.button("🔄 Generate Another Workout", use_container_width=True):
+                st.session_state.workout_completed = False
+                st.session_state.current_plan = generate_workout_plan(profile)
+                st.rerun()
+
+    else:
+        # WORKOUT CARD VIEW
+        st.markdown("### Today's Personalized Plan")
+        
+        if 'current_plan' not in st.session_state:
+            st.session_state.current_plan = generate_workout_plan(profile)
+            
+        plan = st.session_state.current_plan
+        
+        if not plan:
+            st.warning("We're adjusting parameters to find the best fit. Here is a mobility starter.")
+            plan = [ex for ex in EXERCISE_LIBRARY if "Mobility" in ex['tags']][:2]
+
+        # Render Cards
+        for ex in plan:
+            render_workout_card(ex)
+            st.write("") # spacer
+
+        if st.button("✅ Complete Workout", type="primary", use_container_width=True):
+            st.session_state.streak += 1
+            st.session_state.workout_completed = True # TRIGGER POST WORKOUT VIEW
+            st.rerun()
 
 def render_library():
     st.title("📚 Exercise Library")
@@ -578,60 +616,105 @@ def render_nutrition_premium():
     profile = st.session_state.user_profile
     user_diet = profile.get("diet", "No Preference")
     
-    # Teaser Content
-    st.info(f"We see you prefer a **{user_diet}** diet. We have 50+ recipes waiting for you!")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("### 🥣 Breakfast Preview")
-        st.markdown(f"**{user_diet} Power Oats**\n\n*High protein, easy prep.*")
-        st.caption("Ingredients hidden...")
+    # CHECK IF UNLOCKED
+    if st.session_state.premium_unlocked:
+        # UNLOCKED CONTENT
+        st.success(f"🔓 Premium Unlocked! Viewing {user_diet} Plans.")
         
-    with col2:
-        st.markdown("### 🥗 Lunch Preview")
-        st.markdown(f"**{user_diet} Energy Bowl**\n\n*Great for recovery.*")
-        st.caption("Ingredients hidden...")
+        tab1, tab2, tab3 = st.tabs(["Daily Meals", "Shopping List", "Chat with Coach"])
         
-    st.divider()
+        with tab1:
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                st.markdown("### 🥣 Breakfast")
+                st.image("https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=400", use_container_width=True)
+                st.info(f"**{user_diet} Power Oats**\n\n*Oats, Chia Seeds, Berries, Protein Powder*")
+            with c2:
+                st.markdown("### 🥗 Lunch")
+                st.image("https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400", use_container_width=True)
+                st.info(f"**{user_diet} Energy Bowl**\n\n*Quinoa, Avocado, Chickpeas, Tahini*")
+            with c3:
+                st.markdown("### 🍲 Dinner")
+                st.image("https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400", use_container_width=True)
+                st.info(f"**{user_diet} Recovery Stew**\n\n*Lentils, Sweet Potato, Spinach, Spices*")
+                
+        with tab2:
+            st.checkbox("Oats (500g)")
+            st.checkbox("Almond Milk")
+            st.checkbox("Spinach")
+            st.checkbox("Chickpeas (2 cans)")
+            
+        with tab3:
+            st.chat_message("assistant").write("Hello! I'm your FitBod Nutrition Coach. How can I help you tweak your diet today?")
+            st.chat_message("user").write("I need more iron in my diet.")
+            st.chat_message("assistant").write("Great! Let's add more lentils and spinach to your dinner plan.")
+
+    else:
+        # LOCKED CONTENT (TEASER)
+        st.info(f"We see you prefer a **{user_diet}** diet. We have 50+ recipes waiting for you!")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### 🥣 Breakfast Preview")
+            st.markdown(f"**{user_diet} Power Oats**\n\n*High protein, easy prep.*")
+            st.caption("Ingredients hidden...")
+            
+        with col2:
+            st.markdown("### 🥗 Lunch Preview")
+            st.markdown(f"**{user_diet} Energy Bowl**\n\n*Great for recovery.*")
+            st.caption("Ingredients hidden...")
+            
+        st.divider()
+        
+        # THE UPSELL CARD
+        with st.container():
+            st.markdown(
+                """
+                <div style="background: linear-gradient(135deg, #16a34a 0%, #064e3b 100%); padding: 30px; border-radius: 20px; text-align: center; color: white;">
+                    <h1>🔒 Unlock FitBod Premium</h1>
+                    <p style="font-size: 1.2rem;">Get full access to personalized Meal Plans, 1-on-1 Coaching, and Advanced Analytics.</p>
+                    <ul style="list-style: none; padding: 0; font-size: 1.1rem; margin-bottom: 25px;">
+                        <li>✅ 500+ Healthy Recipes</li>
+                        <li>✅ Direct Chat with Physiotherapists</li>
+                        <li>✅ Ad-Free Experience</li>
+                    </ul>
+                    <h2 style="color: #fbbf24; margin-bottom: 20px;">Only $4.99 / month</h2>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            # We use columns to center the button visually
+            b1, b2, b3 = st.columns([1, 2, 1])
+            with b2:
+                if st.button("⭐ Get Premium Access", use_container_width=True):
+                    # SIMULATE PAYMENT
+                    with st.spinner("Processing Payment..."):
+                        time.sleep(1.5)
+                        st.session_state.premium_unlocked = True
+                        st.rerun()
+
+def render_sponsors():
+    st.title("🤝 Our Sponsors & Partners")
+    st.write("We are proud to be supported by these accessible fitness brands. Their support keeps the core features of FitBod free for everyone.")
     
-    # THE UPSELL CARD
-    with st.container():
+    sponsors = [
+        {"name": "EcoHydrate", "offer": "20% OFF Smart Bottles", "desc": "Easy-grip, lightweight bottles designed for accessible hydration.", "color": "#e0f2f1"},
+        {"name": "FlexMat", "offer": "Buy 1 Get 1 Free", "desc": "Extra thick, non-slip mats perfect for chair stability and joint protection.", "color": "#f3e5f5"},
+        {"name": "ProteinPlus", "offer": "Free Sample Pack", "desc": "Plant-based nutrition shakes with easy-open caps.", "color": "#fff3e0"},
+    ]
+    
+    for s in sponsors:
         st.markdown(
-            """
-            <div style="background: linear-gradient(135deg, #16a34a 0%, #064e3b 100%); padding: 30px; border-radius: 20px; text-align: center; color: white;">
-                <h1>🔒 Unlock FitBod Premium</h1>
-                <p style="font-size: 1.2rem;">Get full access to personalized Meal Plans, 1-on-1 Coaching, and Advanced Analytics.</p>
-                <ul style="list-style: none; padding: 0; font-size: 1.1rem; margin-bottom: 25px;">
-                    <li>✅ 500+ Healthy Recipes</li>
-                    <li>✅ Direct Chat with Physiotherapists</li>
-                    <li>✅ Ad-Free Experience</li>
-                </ul>
-                <h2 style="color: #fbbf24; margin-bottom: 20px;">Only $4.99 / month</h2>
+            f"""
+            <div style="background-color: {s['color']}; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 5px solid #333;">
+                <h3 style="margin:0; color: #333;">{s['name']}</h3>
+                <h4 style="color: #d81b60; margin: 5px 0;">{s['offer']}</h4>
+                <p style="color: #555;">{s['desc']}</p>
+                <button style="background: #333; color: white; border:none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Visit Website</button>
             </div>
             """,
             unsafe_allow_html=True
         )
-        # We use columns to center the button visually
-        b1, b2, b3 = st.columns([1, 2, 1])
-        with b2:
-            if st.button("⭐ Get Premium Access", use_container_width=True):
-                st.balloons()
-                st.success("Thank you for your interest! Payment gateway would open here.")
-
-def render_resources():
-    st.title("🔗 Resources & Equipment")
-    st.write("Curated links for adaptive fitness equipment.")
-    
-    links = [
-        {"name": "Theraband Resistance Bands", "url": "#", "desc": "Latex-free bands suitable for seated exercises."},
-        {"name": "Active Hands Gripping Aids", "url": "#", "desc": " Essential for users with limited hand function."},
-        {"name": "Wheelchair Yoga Mat", "url": "#", "desc": "Non-slip mats designed for chair stability."},
-    ]
-    
-    for link in links:
-        with st.container():
-            st.markdown(f"**[{link['name']}]({link['url']})**")
-            st.caption(link['desc'])
 
 def render_settings():
     st.title("⚙️ Settings")
@@ -655,6 +738,8 @@ if 'current_page' not in st.session_state: st.session_state.current_page = "Dash
 if 'streak' not in st.session_state: st.session_state.streak = 0
 if 'hydration' not in st.session_state: st.session_state.hydration = 0
 if 'accessibility_mode' not in st.session_state: st.session_state.accessibility_mode = False
+if 'premium_unlocked' not in st.session_state: st.session_state.premium_unlocked = False
+if 'workout_completed' not in st.session_state: st.session_state.workout_completed = False
 
 # Apply Styles
 inject_custom_css(st.session_state.accessibility_mode)
@@ -678,7 +763,7 @@ else:
         render_progress()
     elif page == "Nutrition":
         render_nutrition_premium()
-    elif page == "Resources":
-        render_resources()
+    elif page == "Sponsors":
+        render_sponsors()
     elif page == "Settings":
         render_settings()
