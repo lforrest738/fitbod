@@ -16,7 +16,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- EXPANDED EXERCISE LIBRARY (VARIED ROUTINES) ---
+# --- EXPANDED EXERCISE LIBRARY ---
 EXERCISE_LIBRARY = [
   # --- SEATED STRENGTH ---
   {
@@ -184,22 +184,20 @@ RECIPES = [
 ]
 
 # --- SPONSOR MAPPING ---
-# If user buys a recipe with these ingredients, show a voucher
 SPONSOR_DEALS = {
-    "Protein Powder": {"sponsor": "ProteinPlus", "code": "PRO20 (20% Off)", "color": "#fff3e0"},
-    "Oats": {"sponsor": "WholeGrainz", "code": "OAT5 (5% Off)", "color": "#f1f8e9"},
-    "Almond Milk": {"sponsor": "NutriMilk", "code": "MILK10 (10% Off)", "color": "#e0f7fa"},
-    "Resistance Bands": {"sponsor": "FlexMat", "code": "FLEX15 (15% Off)", "color": "#f3e5f5"} # Cross-sell example
+    "Protein Powder": {"sponsor": "ProteinPlus", "code": "PRO20 (20% Off)", "color": "#FFF3E0"},
+    "Oats": {"sponsor": "WholeGrainz", "code": "OAT5 (5% Off)", "color": "#F1F8E9"},
+    "Almond Milk": {"sponsor": "NutriMilk", "code": "MILK10 (10% Off)", "color": "#E0F7FA"},
+    "Resistance Bands": {"sponsor": "FlexMat", "code": "FLEX15 (15% Off)", "color": "#F3E5F5"} 
 }
 
 QUOTES = [
-    "Small steps every day lead to big changes.",
-    "Listen to your body, it knows what it can do.",
-    "Your pace is the best pace.",
-    "Fitness is for everybody and every body.",
-    "You showed up today, and that is a victory.",
-    "Focus on what you CAN do.",
-    "Believe in yourself and all that you are."
+    "Small steps lead to big changes! 🚀",
+    "Your pace is the best pace. 🌟",
+    "Fitness is for everybody and every body. 💛",
+    "You showed up today, and that is a victory! 🏆",
+    "Focus on what you CAN do. 💪",
+    "Believe in yourself! ✨"
 ]
 
 # --- 2. STYLE & THEME ENGINE ---
@@ -207,194 +205,186 @@ QUOTES = [
 def inject_custom_css(mode_active):
     """
     Injects CSS. 
-    Standard Mode: Modern Gradient Theme (Teal/Emerald/Slate).
-    Accessibility Mode: High Contrast, Large Text.
+    Standard Mode: 'Playful & Bright' (Coral, Turquoise, Yellow).
+    Accessibility Mode: STRICT High Contrast (Black/Yellow).
     """
     if mode_active:
-        # --- ACCESSIBILITY MODE (High Contrast) ---
+        # --- STRICT ACCESSIBILITY MODE ---
         st.markdown(
             """
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Verdana&display=swap');
             
-            html, body, [class*="css"], p, div, h1, h2, h3 { 
-                font-size: 24px !important; 
-                font-family: 'Atkinson Hyperlegible', sans-serif !important; 
-                line-height: 1.6 !important;
-                color: #FFFFFF !important;
+            /* FORCE OVERRIDES FOR EVERYTHING */
+            html, body, .stApp {
+                background-color: #000000 !important;
+                font-family: 'Verdana', sans-serif !important;
             }
-            .stApp { background-color: #000000 !important; }
             
-            /* High Contrast Interactive Elements */
-            .stButton > button { 
-                background-color: #FFFF00 !important; 
-                color: #000000 !important; 
-                border: 4px solid #FFFFFF !important; 
-                font-weight: bold !important; 
-                font-size: 26px !important; 
-                padding: 20px !important; 
+            /* TEXT */
+            h1, h2, h3, h4, h5, h6, p, div, span, label, li {
+                color: #FFFF00 !important;
+                text-shadow: none !important;
+            }
+            
+            /* BUTTONS */
+            .stButton > button {
+                background-color: #000000 !important;
+                color: #FFFF00 !important;
+                border: 4px solid #FFFF00 !important;
+                font-weight: bold !important;
+                font-size: 20px !important;
                 border-radius: 0px !important;
-                margin-bottom: 15px !important;
+                box-shadow: none !important;
+                padding: 15px !important;
             }
             .stButton > button:hover {
-                background-color: #FFFFFF !important;
-                border-color: #FFFF00 !important;
+                background-color: #FFFF00 !important;
+                color: #000000 !important;
             }
             
-            /* High Contrast Containers */
-            div[data-testid="stMetric"], div[data-testid="stExpander"], div[data-testid="stContainer"] {
-                background-color: #1a1a1a !important; 
-                border: 3px solid #FFFF00 !important; 
+            /* CONTAINERS & CARDS */
+            div[data-testid="stContainer"], div[data-testid="stExpander"] {
+                background-color: #000000 !important;
+                border: 4px solid #FFFF00 !important;
                 border-radius: 0px !important;
+                box-shadow: none !important;
             }
             
-            h1, h2, h3, h4 { 
-                color: #FFFF00 !important; 
-                text-decoration: underline; 
-                text-transform: uppercase;
-                letter-spacing: 2px;
+            /* INPUTS */
+            input, select, textarea, div[data-baseweb="select"] {
+                background-color: #000000 !important;
+                color: #FFFF00 !important;
+                border: 2px solid #FFFF00 !important;
             }
-            .stSuccess, .stInfo, .stWarning { 
-                background-color: #333333 !important; 
-                color: #FFFF00 !important; 
-                border-left: 10px solid #FFFFFF !important;
+            
+            /* MESSAGES */
+            .stSuccess, .stInfo, .stWarning, .stError {
+                background-color: #000000 !important;
+                color: #FFFF00 !important;
+                border: 2px solid #FFFF00 !important;
             }
+            
+            /* HIDE DECORATIVE ELEMENTS */
+            .decoration, .gradient { display: none !important; }
             </style>
             """,
             unsafe_allow_html=True
         )
     else:
-        # --- MODERN UX MODE ---
+        # --- FUN & COLOURFUL MODE ---
         st.markdown(
             """
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
             
             /* Global Reset & Font */
             html, body, [class*="css"] {
-                font-family: 'Inter', sans-serif;
-                color: #1e293b; /* Slate 800 */
+                font-family: 'Nunito', sans-serif;
+                color: #2D3436;
             }
             
-            /* Background */
+            /* Background - Warm Cream */
             .stApp {
-                background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); /* Teal to Sky light gradient */
+                background-color: #FFF9F5; 
             }
             
-            /* Headers */
-            h1, h2, h3 {
-                font-family: 'Poppins', sans-serif;
-                color: #0f766e; /* Teal 700 */
-                font-weight: 700;
-            }
-            
+            /* Headers - Pop Colors */
             h1 {
-                background: linear-gradient(120deg, #0d9488, #0f766e);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
+                color: #FF6B6B; /* Coral Red */
+                font-weight: 900;
+                font-size: 3rem;
+                text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
             }
+            h2 { color: #4ECDC4; font-weight: 800; } /* Turquoise */
+            h3 { color: #FF9F43; font-weight: 700; } /* Orange */
             
-            /* Modern Cards (Glassmorphism-lite) */
-            div[data-testid="stContainer"], div[data-testid="stMetric"], div[data-testid="stExpander"] {
-                background: #ffffff;
-                border-radius: 16px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.5);
+            /* Fun Cards */
+            div[data-testid="stContainer"], div[data-testid="stExpander"] {
+                background: #FFFFFF;
+                border-radius: 20px;
+                border: 2px solid #F0F0F0;
+                box-shadow: 6px 6px 0px #4ECDC4; /* Pop shadow */
                 padding: 1.5rem;
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                transition: transform 0.2s;
             }
-            
             div[data-testid="stContainer"]:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+                box-shadow: 6px 8px 0px #4ECDC4;
             }
             
-            /* Metrics */
-            div[data-testid="stMetric"] label {
-                color: #64748b; /* Slate 500 */
-                font-size: 0.9rem;
-            }
-            div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
-                color: #0f766e;
-                font-weight: 800;
-            }
-            
-            /* Primary Buttons */
+            /* Bubbly Buttons */
             .stButton > button {
-                background: linear-gradient(to right, #0d9488, #0f766e);
+                background: linear-gradient(45deg, #FF6B6B, #FF8E53);
                 color: white;
                 border: none;
-                border-radius: 12px;
-                padding: 0.6rem 1.2rem;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 4px 6px rgba(13, 148, 136, 0.2);
-                width: 100%;
+                border-radius: 25px;
+                padding: 0.7rem 1.5rem;
+                font-weight: 800;
+                font-size: 1.1rem;
+                box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+                transition: all 0.2s;
             }
-            
             .stButton > button:hover {
-                background: linear-gradient(to right, #14b8a6, #0d9488);
-                transform: translateY(-2px);
-                box-shadow: 0 10px 15px rgba(13, 148, 136, 0.3);
+                transform: scale(1.05);
+                box-shadow: 0 6px 15px rgba(255, 107, 107, 0.6);
                 color: white !important;
             }
-            
             .stButton > button:active {
-                transform: translateY(0);
+                transform: scale(0.95);
             }
             
-            /* Premium/Purchase Button Style (Gold) */
+            /* Secondary Buttons (Purchase/Action) */
             button[kind="secondary"] {
-                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-                color: white !important;
-                border: none;
+                background: linear-gradient(45deg, #FFE66D, #FFD93D);
+                color: #2D3436 !important;
+                border: 2px solid #FFD93D;
             }
 
-            /* Inputs */
+            /* Inputs - Friendly & Round */
             .stTextInput input, .stSelectbox div[data-baseweb="select"], .stMultiSelect div[data-baseweb="select"] {
-                background-color: #ffffff;
-                border: 1px solid #cbd5e1;
-                border-radius: 10px;
-                color: #334155;
+                background-color: #FFFFFF;
+                border: 2px solid #E0E0E0;
+                border-radius: 15px;
+                padding: 10px;
+                color: #2D3436;
             }
-            
+            .stTextInput input:focus {
+                border-color: #FF6B6B;
+            }
+
             /* Navigation Bar Simulation */
             div[data-testid="column"] button {
                 background: transparent;
-                color: #475569;
+                color: #636E72;
                 box-shadow: none;
-                border: 1px solid transparent;
+                border: none;
             }
-            
             div[data-testid="column"] button:hover {
-                background: #e0f2fe;
-                color: #0f766e;
-                box-shadow: none;
+                background: #EAFBF9;
+                color: #4ECDC4;
                 transform: none;
-                border: 1px solid #ccfbf1;
+                border-radius: 15px;
             }
 
-            /* Expander Header */
-            .streamlit-expanderHeader {
-                font-family: 'Poppins', sans-serif;
-                color: #334155;
-                font-weight: 600;
-            }
-            
             /* Success/Info Messages */
-            .stSuccess, .stInfo, .stWarning {
-                border-radius: 12px;
-                border: none;
-                color: #334155;
-            }
             .stSuccess {
-                background-color: #d1fae5;
-                border-left: 5px solid #10b981;
+                background-color: #D1F2EB;
+                color: #0B5345;
+                border-radius: 15px;
+                border: 2px solid #A3E4D7;
             }
             .stInfo {
-                background-color: #e0f2fe;
-                border-left: 5px solid #0ea5e9;
+                background-color: #D6EAF8;
+                color: #154360;
+                border-radius: 15px;
+                border: 2px solid #AED6F1;
+            }
+            
+            /* Metrics */
+            div[data-testid="stMetricValue"] {
+                color: #FF6B6B;
+                font-weight: 900;
             }
             </style>
             """,
@@ -416,8 +406,7 @@ def get_audio_html(text):
 
 def generate_workout_plan(user_profile):
     """
-    Robust generator that uses the expanded library.
-    It tries to find unique routines suitable for the user's needs.
+    Robust generator ensuring diverse routines.
     """
     disability = user_profile.get('disability', [])
     equipment = user_profile.get('equipment', [])
@@ -425,32 +414,27 @@ def generate_workout_plan(user_profile):
     
     suitable = []
     
-    # 1. Scoring System
     for ex in EXERCISE_LIBRARY:
         score = 0
-        # Positive filtering: Does this exercise match their needs?
+        # Filter Logic
         if any(tag in ex['tags'] for tag in disability): score += 3
         if "Wheelchair User" in disability and "Wheelchair User" in ex['tags']: score += 5
         
-        # Equipment filtering: Must have required equipment
         required_eq = [t for t in ex['tags'] if t in ["Resistance Bands", "Light Weights", "Chair"]]
         has_eq = all(eq in equipment for eq in required_eq)
         
         if has_eq or "None" in ex['tags']: 
             score += 1
         else: 
-            score = -999 # Impossible to do
+            score = -999
             
-        # Goal Boost
         if goal in ex['tags'] or goal in ex['category']: score += 2
         
         if score > 0: suitable.append(ex)
     
-    # 2. Random Selection ensuring variety
-    # If we have enough, pick 3 random ones
+    # Ensure unique selection
     if len(suitable) >= 3: 
         return random.sample(suitable, 3)
-    # If limited options, return what we have
     return suitable
 
 def get_greeting(name):
@@ -467,7 +451,6 @@ def navigate_to(page):
     st.rerun()
 
 def render_navbar():
-    """Renders a modern top navigation bar using columns and buttons."""
     st.markdown("---")
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     
@@ -495,29 +478,30 @@ def render_onboarding(is_edit=False):
         btn_label = "Update Profile"
         container = st.container(border=True)
     else:
+        # Fun Hero Section
         st.markdown(
             """
-            <div style="text-align: center; padding: 40px 0; background: linear-gradient(180deg, rgba(220,252,231,0) 0%, rgba(220,252,231,0.5) 100%); border-radius: 20px; margin-bottom: 30px;">
-                <h1 style="font-size: 4rem; margin-bottom: 0; background: -webkit-linear-gradient(45deg, #166534, #15803d); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">FitBod 🥑</h1>
-                <h3 style="font-weight: 300; font-style: italic; color: #374151; margin-top: 10px;">Empowering Movement. No Limits.</h3>
-                <p style="font-size: 1.2rem; color: #4b5563; max-width: 600px; margin: 20px auto;">
-                    Your personalized, adaptive fitness companion. Designed for every body, every ability, and every goal.
+            <div style="text-align: center; padding: 50px 0; background-color: #FFF3E0; border-radius: 30px; margin-bottom: 30px; border: 3px solid #FF6B6B;">
+                <h1 style="color: #FF6B6B; font-size: 4rem; margin: 0; text-shadow: 3px 3px 0px #FFD93D;">FitBod 🥑</h1>
+                <h3 style="color: #4ECDC4; margin-top: 10px;">Fitness is for Every Body! ✨</h3>
+                <p style="font-size: 1.3rem; color: #576574; max-width: 600px; margin: 20px auto;">
+                    Your colorful, adaptive companion for movement, health, and happiness.
                 </p>
             </div>
             """, 
             unsafe_allow_html=True
         )
-        st.markdown("### Let's design your journey 👇")
+        st.markdown("### Let's get started! 👇")
         btn_label = "Start My Journey"
         container = st.container(border=True)
 
     with container:
         with st.form("profile_form"):
             st.subheader("1. The Basics")
-            col_basic1, col_basic2 = st.columns(2)
-            with col_basic1:
+            col1, col2 = st.columns(2)
+            with col1:
                 name = st.text_input("First Name", value=profile.get("name", ""))
-            with col_basic2:
+            with col2:
                 age_group = st.selectbox(
                     "Age Category", 
                     ["Under 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"],
@@ -609,28 +593,30 @@ def render_dashboard():
     with col_head:
         st.title(greeting)
         quote = random.choice(QUOTES)
+        # Colorful Quote Card
         st.markdown(
             f"""
-            <div style="background-color: #0f766e; padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #fbbf24; margin:0; font-family: 'Poppins', sans-serif;">✨ Daily Motivation</h3>
-                <p style="font-size: 1.3em; font-style: italic; margin-top: 10px; color: #f0fdfa;">"{quote}"</p>
+            <div style="background-color: #4ECDC4; padding: 20px; border-radius: 20px; color: white; margin-bottom: 20px; border: 3px solid #26A69A;">
+                <h3 style="color: #FFFFFF; margin:0; text-shadow: 1px 1px 0px #26A69A;">✨ Daily Vibe</h3>
+                <p style="font-size: 1.3em; font-weight: 700; font-style: italic; margin-top: 10px;">"{quote}"</p>
             </div>
             """, unsafe_allow_html=True
         )
-        st.markdown(f"**Current Focus:** `{profile.get('goal', 'General Fitness')}`")
+        st.markdown(f"**Focus:** `{profile.get('goal', 'General Fitness')}`")
     with col_img:
-        st.metric("Current Streak", f"🔥 {st.session_state.streak}")
+        st.metric("Streak 🔥", f"{st.session_state.streak}")
 
+    # Quick Actions
     with st.container():
         hc1, hc2, hc3 = st.columns(3)
         with hc1:
-            st.metric("Hydration Tracker 💧", f"{st.session_state.hydration} / 8 glasses")
+            st.metric("Hydration 💧", f"{st.session_state.hydration} / 8")
         with hc2:
-            if st.button("➕ Drink Water", use_container_width=True):
+            if st.button("➕ Drink", use_container_width=True):
                 st.session_state.hydration += 1
                 st.rerun()
         with hc3:
-            if st.button("🔄 New Routine", use_container_width=True):
+            if st.button("🔄 New Mix", use_container_width=True):
                 st.session_state.current_plan = generate_workout_plan(profile)
                 st.session_state.workout_completed = False
                 st.rerun()
@@ -639,109 +625,105 @@ def render_dashboard():
 
     if st.session_state.workout_completed:
         st.balloons()
-        st.markdown("## 🎉 Amazing Job, " + profile.get('name', 'Friend') + "!")
-        st.success("You've completed your daily routine. Take a moment to rest and reflect.")
+        st.markdown(f"## 🎉 Woohoo, {profile.get('name', 'Friend')}!")
+        st.success("You crushed it! Time to relax.")
         c1, c2 = st.columns(2)
         with c1:
-            st.info("💡 **Tip:** Tracking how you feel helps us adjust future intensity.")
-            feeling = st.text_area("How are you feeling?", key="journal_input", placeholder="I feel energized...")
+            st.info("💡 **Check-in:** How do you feel?")
+            feeling = st.text_area("Write it down...", key="journal_input")
             col_save, col_view = st.columns([1, 1])
             with col_save:
-                if st.button("💾 Save to Journal"):
+                if st.button("💾 Save"):
                     if feeling:
                         entry = {"date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), "note": feeling}
                         st.session_state.journal_entries.append(entry)
                         st.session_state.last_saved_feeling = True
-                        st.toast("Journal Entry Saved!")
-                    else: st.error("Please write something to save!")
+                        st.toast("Saved!")
+                    else: st.error("Empty note!")
             if st.session_state.get('last_saved_feeling', False):
-                with col_view: st.success("Saved!")
-                if st.button("📖 View in Progress Tab"):
+                with col_view: st.success("Done!")
+                if st.button("📖 Go to Journal"):
                     st.session_state.last_saved_feeling = False
                     navigate_to("Progress")
         with c2:
-            st.markdown("### What's Next?")
-            if st.button("📈 View Progress Stats", use_container_width=True): navigate_to("Progress")
+            st.markdown("### Next Steps")
+            if st.button("📈 See Stats", use_container_width=True): navigate_to("Progress")
             st.write("")
-            if st.button("🔄 Generate Another Workout", use_container_width=True):
+            if st.button("🔄 Another Round?", use_container_width=True):
                 st.session_state.workout_completed = False
                 st.session_state.current_plan = generate_workout_plan(profile)
                 st.rerun()
     else:
-        st.markdown("### Today's Personalized Plan")
+        st.markdown("### ⚡ Today's Mix")
         if 'current_plan' not in st.session_state:
             st.session_state.current_plan = generate_workout_plan(profile)
         plan = st.session_state.current_plan
         if not plan:
-            st.warning("We're adjusting parameters to find the best fit. Here is a mobility starter.")
+            st.warning("Adjusting based on your gear... Here's a mobility starter!")
             plan = [ex for ex in EXERCISE_LIBRARY if "Mobility" in ex['tags']][:2]
         for ex in plan:
             render_workout_card(ex)
             st.write("")
-        if st.button("✅ Complete Workout", type="primary", use_container_width=True):
+        if st.button("✅ I Did It!", type="primary", use_container_width=True):
             st.session_state.streak += 1
             st.session_state.workout_completed = True
             st.rerun()
 
 def render_library():
     st.title("📚 Exercise Library")
-    st.write("Browse all accessible exercises.")
     col_search, col_filter = st.columns([2, 1])
     with col_search:
-        search_term = st.text_input("Search exercises...", placeholder="e.g. 'shoulder'")
+        search_term = st.text_input("Find an exercise...", placeholder="e.g. 'Push'")
     with col_filter:
-        cat_filter = st.selectbox("Category", ["All"] + list(set(e['category'] for e in EXERCISE_LIBRARY)))
+        cat_filter = st.selectbox("Filter", ["All"] + list(set(e['category'] for e in EXERCISE_LIBRARY)))
     filtered = EXERCISE_LIBRARY
     if cat_filter != "All": filtered = [e for e in filtered if e['category'] == cat_filter]
     if search_term: filtered = [e for e in filtered if search_term.lower() in e['title'].lower()]
     for ex in filtered: render_workout_card(ex)
 
 def render_progress():
-    st.title("📈 Your Progress")
+    st.title("📈 Progress Party")
     data = {"Day": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], "Workouts": [1, 0, 1, 1, 0, 1, 0]}
     df = pd.DataFrame(data)
     col1, col2 = st.columns(2)
-    with col1: st.metric("Total Active Minutes", f"{st.session_state.streak * 15} mins")
-    with col2: st.metric("Total Calories Burned", f"{st.session_state.streak * 120} kcal")
+    with col1: st.metric("Active Mins", f"{st.session_state.streak * 15}")
+    with col2: st.metric("Total Burn", f"{st.session_state.streak * 120} kcal")
     st.subheader("Weekly Activity")
     st.bar_chart(df.set_index("Day"))
-    st.subheader("📝 Journal History")
+    st.subheader("📝 My Journal")
     if st.session_state.journal_entries:
         for entry in reversed(st.session_state.journal_entries):
             with st.container(border=True):
                 st.caption(f"📅 {entry['date']}")
                 st.write(entry['note'])
     else:
-        st.info("No journal entries yet. Complete a workout to add one!")
+        st.info("No entries yet. Go work out!")
 
 def render_nutrition_marketplace():
-    """UPDATED: Recipe Marketplace Logic"""
-    st.title("🥦 Nutrition Marketplace")
-    st.write("Unlock healthy, adaptive recipes for just **£0.99**. Ingredients are automatically added to your shopping list!")
+    st.title("🥦 Recipe Market")
+    st.write("Delicious, healthy recipes for just **£0.99**! Populates your list automatically.")
     
-    # 1. RECIPE GRID
-    for recipe in RECIPES:
+    # Grid Layout
+    c1, c2 = st.columns(2)
+    
+    for i, recipe in enumerate(RECIPES):
+        # Alternate columns
+        col = c1 if i % 2 == 0 else c2
         is_owned = recipe['id'] in st.session_state.purchased_recipes
         
-        with st.container():
-            c1, c2 = st.columns([1, 3])
-            with c1:
+        with col:
+            with st.container():
                 st.image(recipe['image'], use_container_width=True)
-            with c2:
                 st.subheader(recipe['title'])
                 st.write(recipe['desc'])
                 
                 if is_owned:
-                    st.success("✅ Purchased")
-                    with st.expander("View Recipe & Ingredients"):
-                        st.write("**Ingredients:**")
-                        for ing in recipe['ingredients']:
-                            st.write(f"- {ing}")
+                    st.success("✅ Owned")
+                    with st.expander("Ingredients"):
+                        for ing in recipe['ingredients']: st.write(f"• {ing}")
                 else:
-                    if st.button(f"🛒 Buy Recipe (£{recipe['price']})", key=f"buy_{recipe['id']}"):
-                        # SIMULATE PURCHASE
+                    if st.button(f"🛒 Buy (£{recipe['price']})", key=f"buy_{recipe['id']}", use_container_width=True):
                         st.session_state.purchased_recipes.add(recipe['id'])
-                        # Add ingredients to list (deduplicated)
                         for ing in recipe['ingredients']:
                             if ing not in st.session_state.shopping_list:
                                 st.session_state.shopping_list.append(ing)
@@ -749,52 +731,39 @@ def render_nutrition_marketplace():
                         st.rerun()
 
     st.markdown("---")
-    
-    # 2. SMART SHOPPING LIST
     st.header("📝 Smart Shopping List")
     
     if not st.session_state.shopping_list:
-        st.info("Your list is empty. Buy a recipe above to populate it!")
+        st.info("List empty! Buy some recipes above.")
     else:
-        st.write("Tick off items as you shop. Look out for Sponsor Deals! 🎁")
-        
+        st.write("Check for **Sponsor Deals** below! 🎁")
         for item in st.session_state.shopping_list:
             col_check, col_deal = st.columns([2, 3])
-            
             with col_check:
                 st.checkbox(item, key=f"shop_{item}")
-                
             with col_deal:
-                # SPONSOR LOGIC
                 if item in SPONSOR_DEALS:
                     deal = SPONSOR_DEALS[item]
-                    st.markdown(
-                        f"""
-                        <div style="background-color: {deal['color']}; padding: 5px 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.9em;">
-                            <strong>🎁 {deal['sponsor']} Deal:</strong> Use code <code>{deal['code']}</code>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
+                    st.markdown(f"<span style='background-color:{deal['color']}; padding: 4px 8px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.8rem;'>🎁 <b>{deal['sponsor']}</b>: {deal['code']}</span>", unsafe_allow_html=True)
 
 def render_sponsors():
-    st.title("🤝 Our Sponsors & Partners")
-    st.write("We are proud to be supported by these accessible fitness brands.")
+    st.title("🤝 Partners")
+    st.write("Brands that support accessible fitness.")
     
     sponsors = [
-        {"name": "ProteinPlus", "offer": "20% OFF Shakes", "desc": "Plant-based nutrition with easy-open caps.", "color": "#fff3e0"},
-        {"name": "WholeGrainz", "offer": "5% OFF Oats", "desc": "Organic oats for sustained energy.", "color": "#f1f8e9"},
-        {"name": "FlexMat", "offer": "Buy 1 Get 1 Free", "desc": "Extra thick mats for chair stability.", "color": "#f3e5f5"},
+        {"name": "ProteinPlus", "offer": "20% OFF Shakes", "desc": "Easy-open caps.", "color": "#FFF3E0"},
+        {"name": "WholeGrainz", "offer": "5% OFF Oats", "desc": "Organic energy.", "color": "#F1F8E9"},
+        {"name": "FlexMat", "offer": "BOGO Mats", "desc": "Extra thick & stable.", "color": "#F3E5F5"},
     ]
     
     for s in sponsors:
         st.markdown(
             f"""
-            <div style="background-color: {s['color']}; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 5px solid #333;">
+            <div style="background-color: {s['color']}; padding: 20px; border-radius: 20px; margin-bottom: 15px; border: 2px solid #EEE;">
                 <h3 style="margin:0; color: #333;">{s['name']}</h3>
-                <h4 style="color: #d81b60; margin: 5px 0;">{s['offer']}</h4>
+                <h4 style="color: #FF6B6B; margin: 5px 0;">{s['offer']}</h4>
                 <p style="color: #555;">{s['desc']}</p>
-                <button style="background: #333; color: white; border:none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Visit Website</button>
+                <button style="background: #2D3436; color: white; border:none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: bold;">Shop Now</button>
             </div>
             """,
             unsafe_allow_html=True
@@ -802,7 +771,7 @@ def render_sponsors():
 
 def render_settings():
     st.title("⚙️ Settings")
-    st.subheader("Appearance")
+    st.subheader("Visuals")
     is_access = st.toggle("Accessibility Mode (High Contrast)", value=st.session_state.accessibility_mode)
     if is_access != st.session_state.accessibility_mode:
         st.session_state.accessibility_mode = is_access
@@ -820,8 +789,6 @@ if 'accessibility_mode' not in st.session_state: st.session_state.accessibility_
 if 'workout_completed' not in st.session_state: st.session_state.workout_completed = False
 if 'journal_entries' not in st.session_state: st.session_state.journal_entries = []
 if 'last_saved_feeling' not in st.session_state: st.session_state.last_saved_feeling = False
-
-# NEW STATES FOR RECIPES
 if 'purchased_recipes' not in st.session_state: st.session_state.purchased_recipes = set()
 if 'shopping_list' not in st.session_state: st.session_state.shopping_list = []
 
@@ -836,6 +803,6 @@ else:
     if page == "Dashboard": render_dashboard()
     elif page == "Library": render_library()
     elif page == "Progress": render_progress()
-    elif page == "Nutrition": render_nutrition_marketplace() # Updated function
+    elif page == "Nutrition": render_nutrition_marketplace()
     elif page == "Sponsors": render_sponsors()
     elif page == "Settings": render_settings()
