@@ -130,7 +130,7 @@ QUOTES = [
 def inject_custom_css(mode_active):
     """
     Injects CSS. 
-    Standard Mode: Expert UI, Avocado/Slate Palette, Glassmorphism.
+    Standard Mode: Modern Gradient Theme (Teal/Emerald/Slate).
     Accessibility Mode: High Contrast, Large Text.
     """
     if mode_active:
@@ -187,59 +187,84 @@ def inject_custom_css(mode_active):
             unsafe_allow_html=True
         )
     else:
-        # --- EXPERT UX MODE (Avocado & Slate) ---
+        # --- MODERN UX MODE ---
         st.markdown(
             """
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;700&display=swap');
             
-            /* Global Font & Background */
+            /* Global Reset & Font */
             html, body, [class*="css"] {
-                font-family: 'Poppins', sans-serif;
+                font-family: 'Inter', sans-serif;
                 color: #1e293b; /* Slate 800 */
             }
+            
+            /* Background */
             .stApp {
-                background-color: #f0fdf4; /* Very light green bg */
-                background-image: radial-gradient(#dcfce7 1px, transparent 1px);
-                background-size: 20px 20px;
+                background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); /* Teal to Sky light gradient */
             }
             
-            /* Typography */
-            h1 {
-                color: #166534; /* Green 700 */
+            /* Headers */
+            h1, h2, h3 {
+                font-family: 'Poppins', sans-serif;
+                color: #0f766e; /* Teal 700 */
                 font-weight: 700;
-                letter-spacing: -0.5px;
-            }
-            h2, h3 {
-                color: #334155; /* Slate 700 */
-                font-weight: 600;
             }
             
-            /* Glassmorphism Containers */
+            h1 {
+                background: linear-gradient(120deg, #0d9488, #0f766e);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            
+            /* Modern Cards (Glassmorphism-lite) */
             div[data-testid="stContainer"], div[data-testid="stMetric"], div[data-testid="stExpander"] {
-                background: rgba(255, 255, 255, 0.95);
-                border-radius: 20px;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+                background: #ffffff;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
                 border: 1px solid rgba(255, 255, 255, 0.5);
                 padding: 1.5rem;
-                backdrop-filter: blur(10px);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            
+            div[data-testid="stContainer"]:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            }
+            
+            /* Metrics */
+            div[data-testid="stMetric"] label {
+                color: #64748b; /* Slate 500 */
+                font-size: 0.9rem;
+            }
+            div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
+                color: #0f766e;
+                font-weight: 800;
             }
             
             /* Primary Buttons */
             .stButton > button {
-                background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); /* Green Gradient */
+                background: linear-gradient(to right, #0d9488, #0f766e);
                 color: white;
                 border: none;
                 border-radius: 12px;
                 padding: 0.6rem 1.2rem;
                 font-weight: 600;
                 letter-spacing: 0.5px;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 4px 6px rgba(13, 148, 136, 0.2);
+                width: 100%;
             }
+            
             .stButton > button:hover {
+                background: linear-gradient(to right, #14b8a6, #0d9488);
                 transform: translateY(-2px);
-                box-shadow: 0 8px 12px rgba(22, 163, 74, 0.3);
+                box-shadow: 0 10px 15px rgba(13, 148, 136, 0.3);
+                color: white !important;
+            }
+            
+            .stButton > button:active {
+                transform: translateY(0);
             }
             
             /* Premium Button Style (Gold) */
@@ -248,17 +273,51 @@ def inject_custom_css(mode_active):
                 color: white !important;
                 border: none;
             }
-            
-            /* Form Elements */
-            .stTextInput input, .stSelectbox, .stMultiSelect {
-                border-radius: 12px;
+
+            /* Inputs */
+            .stTextInput input, .stSelectbox div[data-baseweb="select"], .stMultiSelect div[data-baseweb="select"] {
+                background-color: #ffffff;
                 border: 1px solid #cbd5e1;
-                padding: 0.5rem;
+                border-radius: 10px;
+                color: #334155;
             }
             
-            /* Navbar Simulation */
-            div[data-testid="column"] {
-                text-align: center;
+            /* Navigation Bar Simulation */
+            div[data-testid="column"] button {
+                background: transparent;
+                color: #475569;
+                box-shadow: none;
+                border: 1px solid transparent;
+            }
+            
+            div[data-testid="column"] button:hover {
+                background: #e0f2fe;
+                color: #0f766e;
+                box-shadow: none;
+                transform: none;
+                border: 1px solid #ccfbf1;
+            }
+
+            /* Expander Header */
+            .streamlit-expanderHeader {
+                font-family: 'Poppins', sans-serif;
+                color: #334155;
+                font-weight: 600;
+            }
+            
+            /* Success/Info Messages */
+            .stSuccess, .stInfo, .stWarning {
+                border-radius: 12px;
+                border: none;
+                color: #334155;
+            }
+            .stSuccess {
+                background-color: #d1fae5;
+                border-left: 5px solid #10b981;
+            }
+            .stInfo {
+                background-color: #e0f2fe;
+                border-left: 5px solid #0ea5e9;
             }
             </style>
             """,
@@ -506,9 +565,9 @@ def render_dashboard():
         quote = random.choice(QUOTES)
         st.markdown(
             f"""
-            <div style="background-color: #166534; padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px;">
-                <h3 style="color: #fbbf24; margin:0;">✨ Daily Motivation</h3>
-                <p style="font-size: 1.3em; font-style: italic; margin-top: 10px;">"{quote}"</p>
+            <div style="background-color: #0f766e; padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #fbbf24; margin:0; font-family: 'Poppins', sans-serif;">✨ Daily Motivation</h3>
+                <p style="font-size: 1.3em; font-style: italic; margin-top: 10px; color: #f0fdfa;">"{quote}"</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -547,16 +606,28 @@ def render_dashboard():
             st.info("💡 **Tip:** Tracking how you feel helps us adjust future intensity.")
             feeling = st.text_area("How are you feeling?", key="journal_input", placeholder="I feel energized / tired / proud...")
             
-            if st.button("💾 Save to Journal"):
-                if feeling:
-                    entry = {
-                        "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-                        "note": feeling
-                    }
-                    st.session_state.journal_entries.append(entry)
-                    st.toast("Journal Entry Saved!")
-                else:
-                    st.error("Please write something to save!")
+            # Action Buttons Row
+            col_save, col_view = st.columns([1, 1])
+            with col_save:
+                if st.button("💾 Save to Journal"):
+                    if feeling:
+                        entry = {
+                            "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+                            "note": feeling
+                        }
+                        st.session_state.journal_entries.append(entry)
+                        st.session_state.last_saved_feeling = True # Flag to show success
+                        st.toast("Journal Entry Saved!")
+                    else:
+                        st.error("Please write something to save!")
+            
+            # Show success and offer navigation if saved
+            if st.session_state.get('last_saved_feeling', False):
+                with col_view:
+                    st.success("Saved!")
+                if st.button("📖 View in Progress Tab"):
+                    st.session_state.last_saved_feeling = False # Reset
+                    navigate_to("Progress")
         
         with c2:
             st.markdown("### What's Next?")
@@ -700,8 +771,8 @@ def render_nutrition_premium():
         with st.container():
             st.markdown(
                 """
-                <div style="background: linear-gradient(135deg, #16a34a 0%, #064e3b 100%); padding: 30px; border-radius: 20px; text-align: center; color: white;">
-                    <h1>🔒 Unlock FitBod Premium</h1>
+                <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 30px; border-radius: 20px; text-align: center; color: white;">
+                    <h1 style="color: white !important;">🔒 Unlock FitBod Premium</h1>
                     <p style="font-size: 1.2rem;">Get full access to personalized Meal Plans, 1-on-1 Coaching, and Advanced Analytics.</p>
                     <ul style="list-style: none; padding: 0; font-size: 1.1rem; margin-bottom: 25px;">
                         <li>✅ 500+ Healthy Recipes</li>
@@ -771,6 +842,7 @@ if 'accessibility_mode' not in st.session_state: st.session_state.accessibility_
 if 'premium_unlocked' not in st.session_state: st.session_state.premium_unlocked = False
 if 'workout_completed' not in st.session_state: st.session_state.workout_completed = False
 if 'journal_entries' not in st.session_state: st.session_state.journal_entries = []
+if 'last_saved_feeling' not in st.session_state: st.session_state.last_saved_feeling = False
 
 # Apply Styles
 inject_custom_css(st.session_state.accessibility_mode)
