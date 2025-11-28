@@ -192,12 +192,12 @@ SPONSOR_DEALS = {
 }
 
 QUOTES = [
-    "Small steps lead to big changes! 🚀",
-    "Your pace is the best pace. 🌟",
-    "Fitness is for everybody and every body. 💛",
-    "You showed up today, and that is a victory! 🏆",
-    "Focus on what you CAN do. 💪",
-    "Believe in yourself! ✨"
+    "Small steps lead to big changes.",
+    "Your pace is the best pace.",
+    "Fitness is for everybody.",
+    "You showed up today, and that is a victory.",
+    "Focus on what you CAN do.",
+    "Believe in yourself."
 ]
 
 # --- 2. STYLE & THEME ENGINE ---
@@ -205,7 +205,7 @@ QUOTES = [
 def inject_custom_css(mode_active):
     """
     Injects CSS. 
-    Standard Mode: 'Playful & Bright' (Coral, Turquoise, Yellow).
+    Standard Mode: 'Apple Aesthetic' (Clean, Minimal, San Francisco font, Soft Shadows).
     Accessibility Mode: STRICT High Contrast (Black/Yellow).
     """
     if mode_active:
@@ -272,119 +272,140 @@ def inject_custom_css(mode_active):
             unsafe_allow_html=True
         )
     else:
-        # --- FUN & COLOURFUL MODE ---
+        # --- APPLE / CUPERTINO MODE ---
         st.markdown(
             """
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+            /* Apple-like System Font Stack */
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
             
             /* Global Reset & Font */
             html, body, [class*="css"] {
-                font-family: 'Nunito', sans-serif;
-                color: #2D3436;
+                font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                color: #1D1D1F; /* Apple Dark Grey */
+                letter-spacing: -0.015em;
             }
             
-            /* Background - Warm Cream */
+            /* Background - Soft Off-White Wash */
             .stApp {
-                background-color: #FFF9F5; 
+                background-color: #F5F5F7; 
             }
             
-            /* Headers - Pop Colors */
-            h1 {
-                color: #FF6B6B; /* Coral Red */
-                font-weight: 900;
-                font-size: 3rem;
-                text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            /* Headers */
+            h1, h2, h3 {
+                color: #1D1D1F;
+                font-weight: 600; /* Semibold */
+                letter-spacing: -0.025em;
             }
-            h2 { color: #4ECDC4; font-weight: 800; } /* Turquoise */
-            h3 { color: #FF9F43; font-weight: 700; } /* Orange */
             
-            /* Fun Cards */
+            h1 { font-size: 3rem; margin-bottom: 0.2em; }
+            
+            /* Modern Cards (Apple Card Style) */
             div[data-testid="stContainer"], div[data-testid="stExpander"] {
                 background: #FFFFFF;
-                border-radius: 20px;
-                border: 2px solid #F0F0F0;
-                box-shadow: 6px 6px 0px #4ECDC4; /* Pop shadow */
-                padding: 1.5rem;
-                transition: transform 0.2s;
+                border-radius: 18px; /* Classic Apple curvature */
+                border: 1px solid rgba(0,0,0,0.02);
+                box-shadow: 0 4px 24px rgba(0,0,0,0.04); /* Soft, diffuse shadow */
+                padding: 24px;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
             }
+            
             div[data-testid="stContainer"]:hover {
                 transform: translateY(-2px);
-                box-shadow: 6px 8px 0px #4ECDC4;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.06);
             }
             
-            /* Bubbly Buttons */
+            /* Buttons - Pill Shape & Apple Blue */
             .stButton > button {
-                background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+                background-color: #0071E3; /* Apple Blue */
                 color: white;
                 border: none;
-                border-radius: 25px;
-                padding: 0.7rem 1.5rem;
-                font-weight: 800;
-                font-size: 1.1rem;
-                box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
-                transition: all 0.2s;
-            }
-            .stButton > button:hover {
-                transform: scale(1.05);
-                box-shadow: 0 6px 15px rgba(255, 107, 107, 0.6);
-                color: white !important;
-            }
-            .stButton > button:active {
-                transform: scale(0.95);
+                border-radius: 980px; /* Fully rounded pill */
+                padding: 10px 22px;
+                font-weight: 500;
+                font-size: 16px;
+                box-shadow: none;
+                transition: all 0.2s ease;
             }
             
-            /* Secondary Buttons (Purchase/Action) */
+            .stButton > button:hover {
+                background-color: #0077ED; /* Slightly lighter on hover */
+                transform: scale(1.02);
+                color: white !important;
+            }
+            
+            .stButton > button:active {
+                transform: scale(0.98);
+                background-color: #006EDB;
+            }
+            
+            /* Secondary Action Buttons (Purchase/Action) */
             button[kind="secondary"] {
-                background: linear-gradient(45deg, #FFE66D, #FFD93D);
-                color: #2D3436 !important;
-                border: 2px solid #FFD93D;
-            }
-
-            /* Inputs - Friendly & Round */
-            .stTextInput input, .stSelectbox div[data-baseweb="select"], .stMultiSelect div[data-baseweb="select"] {
-                background-color: #FFFFFF;
-                border: 2px solid #E0E0E0;
-                border-radius: 15px;
-                padding: 10px;
-                color: #2D3436;
-            }
-            .stTextInput input:focus {
-                border-color: #FF6B6B;
-            }
-
-            /* Navigation Bar Simulation */
-            div[data-testid="column"] button {
-                background: transparent;
-                color: #636E72;
-                box-shadow: none;
+                background-color: #F5F5F7;
+                color: #0071E3 !important;
                 border: none;
             }
+            button[kind="secondary"]:hover {
+                background-color: #E8E8ED;
+            }
+
+            /* Inputs - Clean & Minimal */
+            .stTextInput input, .stSelectbox div[data-baseweb="select"], .stMultiSelect div[data-baseweb="select"] {
+                background-color: #FFFFFF;
+                border: 1px solid #D2D2D7; /* Apple border grey */
+                border-radius: 12px;
+                padding: 10px;
+                color: #1D1D1F;
+            }
+            .stTextInput input:focus {
+                border-color: #0071E3;
+                box-shadow: 0 0 0 3px rgba(0,113,227,0.15);
+            }
+
+            /* Navigation Bar Simulation - Tab Bar Style */
+            div[data-testid="column"] button {
+                background: transparent;
+                color: #86868B; /* Inactive grey */
+                box-shadow: none;
+                border: none;
+                font-weight: 500;
+            }
             div[data-testid="column"] button:hover {
-                background: #EAFBF9;
-                color: #4ECDC4;
-                transform: none;
-                border-radius: 15px;
+                background: rgba(0,0,0,0.03);
+                color: #1D1D1F;
+                border-radius: 12px;
+            }
+            div[data-testid="column"] button:focus {
+                color: #0071E3;
             }
 
             /* Success/Info Messages */
             .stSuccess {
-                background-color: #D1F2EB;
-                color: #0B5345;
-                border-radius: 15px;
-                border: 2px solid #A3E4D7;
+                background-color: #E4F9E8; /* Light Green Wash */
+                color: #1F6F36;
+                border-radius: 14px;
+                border: none;
             }
             .stInfo {
-                background-color: #D6EAF8;
-                color: #154360;
-                border-radius: 15px;
-                border: 2px solid #AED6F1;
+                background-color: #E7F3FF; /* Light Blue Wash */
+                color: #0059B3;
+                border-radius: 14px;
+                border: none;
             }
             
             /* Metrics */
             div[data-testid="stMetricValue"] {
-                color: #FF6B6B;
-                font-weight: 900;
+                color: #1D1D1F;
+                font-weight: 700;
+                font-family: -apple-system, sans-serif;
+            }
+            div[data-testid="stMetricLabel"] {
+                color: #86868B;
+            }
+            
+            /* Slider Customization */
+            div[data-baseweb="slider"] {
+                accent-color: #0071E3;
             }
             </style>
             """,
@@ -442,7 +463,7 @@ def get_greeting(name):
     if hour < 12: msg = "Good Morning"
     elif hour < 18: msg = "Good Afternoon"
     else: msg = "Good Evening"
-    return f"{msg}, {name}!" if name else msg
+    return f"{msg}, {name}" if name else msg
 
 # --- 4. NAVIGATION HANDLER ---
 
@@ -478,20 +499,20 @@ def render_onboarding(is_edit=False):
         btn_label = "Update Profile"
         container = st.container(border=True)
     else:
-        # Fun Hero Section
+        # Apple-Style Hero Section (Clean)
         st.markdown(
             """
-            <div style="text-align: center; padding: 50px 0; background-color: #FFF3E0; border-radius: 30px; margin-bottom: 30px; border: 3px solid #FF6B6B;">
-                <h1 style="color: #FF6B6B; font-size: 4rem; margin: 0; text-shadow: 3px 3px 0px #FFD93D;">FitBod 🥑</h1>
-                <h3 style="color: #4ECDC4; margin-top: 10px;">Fitness is for Every Body! ✨</h3>
-                <p style="font-size: 1.3rem; color: #576574; max-width: 600px; margin: 20px auto;">
-                    Your colorful, adaptive companion for movement, health, and happiness.
+            <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 24px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.06);">
+                <h1 style="color: #1D1D1F; font-size: 3.5rem; margin-bottom: 10px; font-weight: 700; letter-spacing: -0.03em;">FitBod 🥑</h1>
+                <h3 style="color: #86868B; font-weight: 500; font-size: 1.5rem; margin-top: 0;">Designed for Every Body.</h3>
+                <p style="font-size: 1.1rem; color: #1D1D1F; max-width: 500px; margin: 20px auto; line-height: 1.6;">
+                    A personalized, adaptive fitness companion that puts you first.
                 </p>
             </div>
             """, 
             unsafe_allow_html=True
         )
-        st.markdown("### Let's get started! 👇")
+        st.markdown("### Let's get started")
         btn_label = "Start My Journey"
         container = st.container(border=True)
 
@@ -566,7 +587,7 @@ def render_workout_card(exercise):
         c1, c2 = st.columns([3, 1])
         with c1:
             st.markdown(f"### {exercise['title']}")
-            st.markdown(f"**{exercise['category']}** • *{exercise['intensity'].title()} Intensity*")
+            st.caption(f"{exercise['category']} • {exercise['intensity']} Intensity")
         with c2:
             st.markdown(f"## ⏱️ {exercise['duration_minutes']}m")
         st.divider()
@@ -593,12 +614,12 @@ def render_dashboard():
     with col_head:
         st.title(greeting)
         quote = random.choice(QUOTES)
-        # Colorful Quote Card
+        # Apple-Style Info Card (Subtle gradient or clean white)
         st.markdown(
             f"""
-            <div style="background-color: #4ECDC4; padding: 20px; border-radius: 20px; color: white; margin-bottom: 20px; border: 3px solid #26A69A;">
-                <h3 style="color: #FFFFFF; margin:0; text-shadow: 1px 1px 0px #26A69A;">✨ Daily Vibe</h3>
-                <p style="font-size: 1.3em; font-weight: 700; font-style: italic; margin-top: 10px;">"{quote}"</p>
+            <div style="background-color: #FFFFFF; padding: 24px; border-radius: 18px; margin-bottom: 20px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                <h4 style="color: #0071E3; margin:0; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Daily Wisdom</h4>
+                <p style="font-size: 1.4rem; font-weight: 600; font-style: italic; margin-top: 8px; color: #1D1D1F;">"{quote}"</p>
             </div>
             """, unsafe_allow_html=True
         )
@@ -744,7 +765,7 @@ def render_nutrition_marketplace():
             with col_deal:
                 if item in SPONSOR_DEALS:
                     deal = SPONSOR_DEALS[item]
-                    st.markdown(f"<span style='background-color:{deal['color']}; padding: 4px 8px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.8rem;'>🎁 <b>{deal['sponsor']}</b>: {deal['code']}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span style='background-color:{deal['color']}; padding: 4px 8px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.8rem; color: #1d1d1f;'>🎁 <b>{deal['sponsor']}</b>: {deal['code']}</span>", unsafe_allow_html=True)
 
 def render_sponsors():
     st.title("🤝 Partners")
@@ -759,11 +780,11 @@ def render_sponsors():
     for s in sponsors:
         st.markdown(
             f"""
-            <div style="background-color: {s['color']}; padding: 20px; border-radius: 20px; margin-bottom: 15px; border: 2px solid #EEE;">
-                <h3 style="margin:0; color: #333;">{s['name']}</h3>
-                <h4 style="color: #FF6B6B; margin: 5px 0;">{s['offer']}</h4>
-                <p style="color: #555;">{s['desc']}</p>
-                <button style="background: #2D3436; color: white; border:none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: bold;">Shop Now</button>
+            <div style="background-color: #FFFFFF; padding: 24px; border-radius: 18px; margin-bottom: 20px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                <h3 style="margin:0; color: #1D1D1F; font-size: 1.2rem;">{s['name']}</h3>
+                <h4 style="color: #0071E3; margin: 5px 0;">{s['offer']}</h4>
+                <p style="color: #86868B;">{s['desc']}</p>
+                <button style="background: #F5F5F7; color: #0071E3; border:none; padding: 8px 16px; border-radius: 980px; cursor: pointer; font-weight: 500;">Shop Now</button>
             </div>
             """,
             unsafe_allow_html=True
